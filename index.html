@@ -6,49 +6,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Arial;background:#f8fff8;}
-header{background:white;padding:20px;text-align:center;border-bottom:1px solid #ddd;}
-h1{color:#2e7d32;margin:0;}
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 padding:20px;
 }
+
 .card{
 background:white;
-border-radius:10px;
+border-radius:12px;
 overflow:hidden;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
 }
+
+.card:hover{
+transform:scale(1.03);
+}
+
 .card img{
 width:100%;
 height:180px;
 object-fit:cover;
 }
-.card h3{
-font-size:16px;
+
+.card p{
 padding:10px;
+font-weight:bold;
 margin:0;
 }
-.btn{
-display:block;
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
 text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
 background:#2e7d32;
 color:white;
-padding:10px;
+padding:10px 15px;
+border-radius:20px;
 text-decoration:none;
-}
-.top-btn{
-display:block;
-margin:20px auto;
-width:250px;
-text-align:center;
-background:black;
-color:white;
-padding:12px;
-text-decoration:none;
-border-radius:25px;
 }
 </style>
 </head>
@@ -60,35 +95,928 @@ border-radius:25px;
 <p>Каталог продукции</p>
 </header>
 
-<a class="top-btn" href="https://greenleaf-global.com/shop/all/" target="_blank">
-Смотреть все товары
-</a>
+<div class="products">
 
-<div class="products" id="products"></div>
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
 
 <script>
-const products = [
-"face cream","shampoo","body lotion","cleaning spray","toothpaste",
-"face mask","hand cream","dish soap","laundry detergent","hair oil",
-"soap","shower gel","skin care","cleaning liquid","cosmetics",
-"eco cleaning","beauty cream","hair shampoo","natural soap","clean house"
-];
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
 
-let html = "";
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
 
-products.forEach(p => {
-  html += `
-  <div class="card">
-    <img src="https://source.unsplash.com/300x200/?${p}">
-    <h3>${p}</h3>
-    <a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
-      Заказать
-    </a>
-  </div>
-  `;
-});
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-document.getElementById("products").innerHTML = html;
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card p{
+padding:10px;
+font-weight:bold;
+margin:0;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+background:#2e7d32;
+color:white;
+padding:10px 15px;
+border-radius:20px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
+
+<div class="products">
+
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card p{
+padding:10px;
+font-weight:bold;
+margin:0;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+background:#2e7d32;
+color:white;
+padding:10px 15px;
+border-radius:20px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
+
+<div class="products">
+
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card p{
+padding:10px;
+font-weight:bold;
+margin:0;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+background:#2e7d32;
+color:white;
+padding:10px 15px;
+border-radius:20px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
+
+<div class="products">
+
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card p{
+padding:10px;
+font-weight:bold;
+margin:0;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+background:#2e7d32;
+color:white;
+padding:10px 15px;
+border-radius:20px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
+
+<div class="products">
+
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card p{
+padding:10px;
+font-weight:bold;
+margin:0;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+background:#2e7d32;
+color:white;
+padding:10px 15px;
+border-radius:20px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
+
+<div class="products">
+
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f6fff6;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card p{
+padding:10px;
+font-weight:bold;
+margin:0;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+max-width:300px;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+background:#2e7d32;
+color:white;
+padding:10px 15px;
+border-radius:20px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
+
+<div class="products">
+
+<div class="card" onclick="openModal('Крем для лица','https://source.unsplash.com/400x300/?cream,skincare')">
+<img src="https://source.unsplash.com/400x300/?cream,skincare">
+<p>Крем для лица</p>
+</div>
+
+<div class="card" onclick="openModal('Шампунь','https://source.unsplash.com/400x300/?shampoo,hair')">
+<img src="https://source.unsplash.com/400x300/?shampoo,hair">
+<p>Шампунь</p>
+</div>
+
+<div class="card" onclick="openModal('Средства для дома','https://source.unsplash.com/400x300/?cleaning,home')">
+<img src="https://source.unsplash.com/400x300/?cleaning,home">
+<p>Средства для дома</p>
+</div>
+
+<div class="card" onclick="openModal('Зубная паста','https://source.unsplash.com/400x300/?toothpaste')">
+<img src="https://source.unsplash.com/400x300/?toothpaste">
+<p>Зубная паста</p>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<img id="img">
+<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+Написать в Instagram
+</a>
+<br><br>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function openModal(title,img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=title;
+document.getElementById("img").src=img;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
 </script>
 
 </body>
