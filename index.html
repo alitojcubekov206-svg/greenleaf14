@@ -1,129 +1,106 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<title>Greenleaf Bishkek</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body {margin:0;font-family:Arial;background:#f5fff5;color:#333;}
-header {background:linear-gradient(135deg,#2e7d32,#66bb6a);color:white;text-align:center;padding:50px 20px;}
-nav {background:white;padding:12px;text-align:center;position:sticky;top:0;z-index:10;}
-nav a {margin:10px;text-decoration:none;color:green;font-weight:bold;}
-section {max-width:1100px;margin:20px auto;padding:20px;}
-.card {background:white;padding:25px;border-radius:15px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
-h2 {color:#2e7d32;}
-ul {margin-left:20px;}
-.btn {display:inline-block;background:#2e7d32;color:white;padding:12px 20px;border-radius:25px;text-decoration:none;margin-top:10px;}
-footer {background:#2e7d32;color:white;text-align:center;padding:20px;}
+/* Стили для сетки товаров как на оригинальном сайте */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: left;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain; /* Чтобы товар не обрезался, как в магазине */
+    margin-bottom: 10px;
+}
+
+.product-card .category-tag {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.product-card h3 {
+    font-size: 14px;
+    margin: 5px 0;
+    height: 40px; /* Чтобы названия были в одну линию */
+    overflow: hidden;
+    color: #333;
+}
+
+.product-card .price {
+    font-weight: bold;
+    color: #2e7d32;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.product-card .buy-btn {
+    background: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+}
 </style>
-</head>
-<body>
-
-<header>
-<h1>Greenleaf Bishkek</h1>
-<p>Эко продукция для дома, здоровья и красоты 🌿</p>
-</header>
-
-<nav>
-<a href="#about">О компании</a>
-<a href="#advantages">Преимущества</a>
-<a href="#products">Продукция</a>
-<a href="#faq">Вопросы</a>
-<a href="#order">Заказать</a>
-</nav>
-
-<section id="about">
-<div class="card">
-<h2>О компании (RU)</h2>
-<p>Greenleaf — компания, которая производит экологически чистую продукцию для дома, здоровья и красоты. Мы предлагаем только качественные и безопасные товары, которые помогут вам заботиться о себе и вашем доме.</p>
-
-<h2>Компания жөнүндө (KG)</h2>
-<p>Greenleaf — үй, ден соолук жана сулуулук үчүн экологиялык таза продукцияларды чыгарган компания. Биз сапаттуу жана коопсуз товарларды сунуштайбыз, алар сиздин жашооңузду жеңилдетет.</p>
-</div>
-</section>
-
-<section id="advantages">
-<div class="card">
-<h2>Почему выбирают нас (RU)</h2>
-<ul>
-<li>✔ Экологически чистые ингредиенты</li>
-<li>✔ Безопасность для здоровья</li>
-<li>✔ Высокое качество продукции</li>
-<li>✔ Доступные цены</li>
-<li>✔ Быстрая доставка по Бишкеку</li>
-<li>✔ Легко заказать через Instagram</li>
-<li>✔ Большой выбор продукции для всех нужд</li>
-</ul>
-
-<h2>Эмне үчүн бизди тандайт (KG)</h2>
-<ul>
-<li>✔ Экологиялык таза компоненттер</li>
-<li>✔ Ден соолукка коопсуз</li>
-<li>✔ Жогорку сапат</li>
-<li>✔ Арзан баа</li>
-<li>✔ Бишкек боюнча тез жеткирүү</li>
-<li>✔ Instagram аркылуу оңой заказ берүү</li>
-<li>✔ Бардык муктаждыктар үчүн чоң ассортимент</li>
-</ul>
-</div>
-</section>
 
 <section id="products">
-<div class="card">
-<h2>Подробная продукция (RU)</h2>
-<p><b>1. Косметика:</b> Кремы, маски, сыворотки и гели для лица и тела. Все продукты содержат натуральные компоненты, увлажняют кожу и сохраняют её здоровье.</p>
-<p><b>2. Уход за кожей:</b> Лосьоны, масла, скрабы. Поддерживают эластичность, питают и защищают от внешних факторов.</p>
-<p><b>3. Гигиена:</b> Шампуни, мыло, зубные пасты, дезодоранты. Натуральные формулы без агрессивной химии.</p>
-<p><b>4. Средства для дома:</b> Эко-средства для уборки, безопасные для детей и животных, эффективные и без запаха.</p>
-<p><b>5. Товары для здоровья:</b> Биопродукты, витамины, полезные добавки — для поддержания иммунитета и жизненного тонуса.</p>
+    <div class="card">
+        <h2>Наш Каталог / Биздин Каталог</h2>
+        <div class="product-grid">
 
-<h2>Толук продукция (KG)</h2>
-<p><b>1. Косметика:</b> Кремдер, бет маскалары, сарысуулар жана гельдер. Натуралдуу компоненттерди камтыйт, терини нымдайт жана сактайт.</p>
-<p><b>2. Териге кам көрүү:</b> Лосьон, майлар, скрабдар. Теринин ийкемдүүлүгүн колдоп, азыктандырат жана коргойт.</p>
-<p><b>3. Гигиена:</b> Шампунь, самын, тиш пастасы, дезодоранттар. Агрессивдүү химиясыз натуралдуу формулалар.</p>
-<p><b>4. Үй үчүн каражаттар:</b> Эко тазалоочу каражаттар, балдар жана жаныбарлар үчүн коопсуз, эффективдүү жана жытсыз.</p>
-<p><b>5. Ден соолук үчүн товарлар:</b> Биопродукттар, витаминдер, пайдалуу кошумчалар — иммунитетти жана энергияны колдоо үчүн.</p>
-</div>
+            <div class="product-card">
+                <div class="category-tag">CARICH / Гигиена</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfI7y3v4y5P-h9N1wX7GvJ7Z9G9G9G9G9G9G&usqp=CAU" alt="CARICH Shampoo">
+                <h3>CARICH Разглаживающий кондиционер с ароматом (500 мл)</h3>
+                <div class="price">Заказать в Direct</div>
+                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
+            </div>
+
+            <div class="product-card">
+                <div class="category-tag">iLiFE / Для дома</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_xO-h9N1wX7GvJ7Z9G9G9G9G9G9G9G&usqp=CAU" alt="iLife Soap">
+                <h3>iLiFE Хозяйственное мыло с содой и энзимами (200 г)</h3>
+                <div class="price">Заказать в Direct</div>
+                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
+            </div>
+
+            <div class="product-card">
+                <div class="category-tag">SEALUXE / Косметика</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7y3v4y5P-h9N1wX7GvJ7Z9G9G9G9G9G9G&usqp=CAU" alt="BB Cushion">
+                <h3>SEALUXE Кордицепс бархатный BB-крем кушон</h3>
+                <div class="price">Заказать в Direct</div>
+                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
+            </div>
+
+            <div class="product-card">
+                <div class="category-tag">CARICH / Уход</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9G9G9G9G9G9G9G9G9G9G9G9G9G9G9G9G&usqp=CAU" alt="Toothpaste">
+                <h3>CARICH Зубная паста с морскими водорослями</h3>
+                <div class="price">Заказать в Direct</div>
+                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
+            </div>
+
+        </div>
+    </div>
 </section>
-
-<section id="faq">
-<div class="card">
-<h2>Частые вопросы (RU)</h2>
-<p><b>Это оригинальная продукция?</b><br>Да, вся продукция официальная и проверена.</p>
-<p><b>Есть доставка?</b><br>Да, доставка осуществляется по Бишкеку.</p>
-<p><b>Как заказать?</b><br>Через Instagram, быстро и удобно.</p>
-
-<h2>Көп берилүүчү суроолор (KG)</h2>
-<p><b>Оригиналбы?</b><br>Ооба, бардык продукциялар расмий жана текшерилген.</p>
-<p><b>Жеткирүү барбы?</b><br>Ооба, Бишкек боюнча жеткирүү бар.</p>
-<p><b>Кантип заказ берем?</b><br>Instagram аркылуу тез жана оңой заказ бере аласыз.</p>
-</div>
-</section>
-
-<section id="order">
-<div class="card">
-<h2>Заказать</h2>
-<p>🚚 Доставка по Бишкеку</p>
-<p>⚡ Быстрый ответ через Instagram</p>
-<p>⭐ Популярная и качественная продукция</p>
-
-<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
-Заказать в Instagram
-</a>
-
-<hr>
-
-<p>Instagram аркылуу заказ берүү</p>
-
-<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
-Заказ берүү
-</a>
-</div>
-</section>
-
-<footer>
-<p>© 2026 Greenleaf Bishkek</p>
-</footer>
-
-</body>
-</html>
