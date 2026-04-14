@@ -1,106 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Greenleaf Bishkek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-/* Стили для сетки товаров как на оригинальном сайте */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+body{margin:0;font-family:Arial;background:#f8fff8;}
+header{background:white;padding:20px;text-align:center;border-bottom:1px solid #ddd;}
+h1{color:#2e7d32;margin:0;}
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
 }
-
-.product-card {
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-align: left;
+.card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
 }
-
-.product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: contain; /* Чтобы товар не обрезался, как в магазине */
-    margin-bottom: 10px;
+.card h3{
+font-size:16px;
+padding:10px;
+margin:0;
 }
-
-.product-card .category-tag {
-    font-size: 10px;
-    color: #888;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+.btn{
+display:block;
+text-align:center;
+background:#2e7d32;
+color:white;
+padding:10px;
+text-decoration:none;
 }
-
-.product-card h3 {
-    font-size: 14px;
-    margin: 5px 0;
-    height: 40px; /* Чтобы названия были в одну линию */
-    overflow: hidden;
-    color: #333;
-}
-
-.product-card .price {
-    font-weight: bold;
-    color: #2e7d32;
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.product-card .buy-btn {
-    background: #2e7d32;
-    color: white;
-    text-align: center;
-    padding: 8px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 13px;
+.top-btn{
+display:block;
+margin:20px auto;
+width:250px;
+text-align:center;
+background:black;
+color:white;
+padding:12px;
+text-decoration:none;
+border-radius:25px;
 }
 </style>
+</head>
 
-<section id="products">
-    <div class="card">
-        <h2>Наш Каталог / Биздин Каталог</h2>
-        <div class="product-grid">
+<body>
 
-            <div class="product-card">
-                <div class="category-tag">CARICH / Гигиена</div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfI7y3v4y5P-h9N1wX7GvJ7Z9G9G9G9G9G9G&usqp=CAU" alt="CARICH Shampoo">
-                <h3>CARICH Разглаживающий кондиционер с ароматом (500 мл)</h3>
-                <div class="price">Заказать в Direct</div>
-                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
-            </div>
+<header>
+<h1>Greenleaf Bishkek</h1>
+<p>Каталог продукции</p>
+</header>
 
-            <div class="product-card">
-                <div class="category-tag">iLiFE / Для дома</div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_xO-h9N1wX7GvJ7Z9G9G9G9G9G9G9G&usqp=CAU" alt="iLife Soap">
-                <h3>iLiFE Хозяйственное мыло с содой и энзимами (200 г)</h3>
-                <div class="price">Заказать в Direct</div>
-                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
-            </div>
+<a class="top-btn" href="https://greenleaf-global.com/shop/all/" target="_blank">
+Смотреть все товары
+</a>
 
-            <div class="product-card">
-                <div class="category-tag">SEALUXE / Косметика</div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7y3v4y5P-h9N1wX7GvJ7Z9G9G9G9G9G9G&usqp=CAU" alt="BB Cushion">
-                <h3>SEALUXE Кордицепс бархатный BB-крем кушон</h3>
-                <div class="price">Заказать в Direct</div>
-                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
-            </div>
+<div class="products" id="products"></div>
 
-            <div class="product-card">
-                <div class="category-tag">CARICH / Уход</div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9G9G9G9G9G9G9G9G9G9G9G9G9G9G9G9G&usqp=CAU" alt="Toothpaste">
-                <h3>CARICH Зубная паста с морскими водорослями</h3>
-                <div class="price">Заказать в Direct</div>
-                <a href="https://www.instagram.com/greenleaf_bishkek14" class="buy-btn">Купить / Сатып алуу</a>
-            </div>
+<script>
+const products = [
+"face cream","shampoo","body lotion","cleaning spray","toothpaste",
+"face mask","hand cream","dish soap","laundry detergent","hair oil",
+"soap","shower gel","skin care","cleaning liquid","cosmetics",
+"eco cleaning","beauty cream","hair shampoo","natural soap","clean house"
+];
 
-        </div>
-    </div>
-</section>
+let html = "";
+
+products.forEach(p => {
+  html += `
+  <div class="card">
+    <img src="https://source.unsplash.com/300x200/?${p}">
+    <h3>${p}</h3>
+    <a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+      Заказать
+    </a>
+  </div>
+  `;
+});
+
+document.getElementById("products").innerHTML = html;
+</script>
+
+</body>
+</html>
