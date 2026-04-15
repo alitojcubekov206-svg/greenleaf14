@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Greenleaf Бишкек | Официальный каталог</title>
+  <title>Greenleaf Бишкек | Каталог</title>
 
   <style>
     body {
@@ -18,22 +18,21 @@
       background: linear-gradient(135deg, #1f8f4a, #2ecc71);
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 50px 20px;
     }
 
     .hero h1 {
       margin: 0;
-      font-size: 38px;
+      font-size: 36px;
     }
 
     .hero p {
-      font-size: 18px;
       margin-top: 10px;
-      opacity: 0.95;
+      font-size: 18px;
     }
 
     .btns {
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .btn {
@@ -51,9 +50,9 @@
 
     /* ABOUT */
     .about {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
-      padding: 30px 20px;
+      padding: 25px 20px;
       text-align: center;
       line-height: 1.6;
     }
@@ -61,23 +60,6 @@
     h2 {
       color: #1f8f4a;
       text-align: center;
-    }
-
-    /* INFO BOXES */
-    .info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
 
     /* PRODUCTS */
@@ -122,7 +104,7 @@
     /* SEARCH */
     .search {
       text-align: center;
-      margin: 20px;
+      margin: 15px;
     }
 
     .search input {
@@ -133,7 +115,7 @@
       border: 1px solid #ccc;
     }
 
-    /* FLOAT BUTTONS */
+    /* FIX BUTTONS */
     .fixed {
       position: fixed;
       right: 15px;
@@ -158,10 +140,10 @@
 <!-- HERO -->
 <div class="hero">
   <h1>Greenleaf Бишкек</h1>
-  <p>Экологичная продукция для дома, здоровья и ухода</p>
+  <p>Экологичные товары для дома, здоровья и ухода</p>
 
   <div class="btns">
-    <a class="btn wa" href="https://wa.me/996700713905" target="_blank">WhatsApp заказ</a>
+    <a class="btn wa" href="https://wa.me/996700713905" target="_blank">WhatsApp</a>
     <a class="btn ig" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">Instagram</a>
   </div>
 </div>
@@ -171,42 +153,34 @@
   <h2>О компании / Компания жөнүндө</h2>
   <p>
     <b>Русский:</b><br>
-    Greenleaf — это современный бренд экологически чистых товаров для дома, ухода за телом и здоровья. Мы предлагаем продукцию без вредной химии, безопасную для детей и всей семьи. Наша миссия — сделать быт людей чище, безопаснее и удобнее.
+    Greenleaf — экологичный бренд товаров для дома и ухода. Мы предлагаем безопасную продукцию без химии для всей семьи. Доставка по Бишкеку.
   </p>
-
   <p>
     <b>Кыргызча:</b><br>
-    Greenleaf — үй, ден соолук жана жеке кам көрүү үчүн экологиялык таза товарлардын бренди. Биз зыяндуу химиясы жок коопсуз продукцияны сунуштайбыз. Биздин максат — адамдардын жашоосун таза жана ыңгайлуу кылуу.
+    Greenleaf — үй жана ден соолук үчүн экологиялык таза товарлар. Коопсуз жана сапаттуу продукция. Бишкек боюнча жеткирүү бар.
   </p>
 </div>
 
-<!-- INFO -->
-<h2>Почему выбирают нас</h2>
-<div class="info">
-  <div class="card">🌿 Экологичная продукция без химии</div>
-  <div class="card">🚚 Доставка по Бишкеку</div>
-  <div class="card">💚 Безопасно для детей</div>
-  <div class="card">📦 Более 80 товаров в каталоге</div>
+<h2>Каталог товаров</h2>
+<div class="search">
+  <input id="searchInput" placeholder="Поиск товара..." onkeyup="render()" />
 </div>
 
-<!-- SEARCH -->
-
-<h2>Каталог товаров</h2>
 <div id="product-list"></div>
 
-<!-- FLOAT BUTTONS -->
+<!-- FIX BUTTONS -->
 <div class="fixed">
   <a class="btn wa" href="https://wa.me/996700713905" target="_blank">WA</a>
   <a class="btn ig" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">IG</a>
 </div>
 
 <footer>
-  © 2026 Greenleaf Бишкек | Все права защищены
+  © 2026 Greenleaf Бишкек
 </footer>
 
 <script>
 const container = document.getElementById("product-list");
-let totalProducts = 84;
+const totalProducts = 84;
 
 function getExt(i){
   if([1,4,5].includes(i)) return "png";
@@ -214,14 +188,17 @@ function getExt(i){
   return "jfif";
 }
 
-function render(filter = ""){
+function render(){
+  const filter = document.getElementById("searchInput").value.toLowerCase();
   container.innerHTML = "";
 
   for(let i=1;i<=totalProducts;i++){
 
+    if(i === 12) continue; // ❌ убрали 12 товар
+
     let name = "Greenleaf " + i;
 
-    if(name.toLowerCase().includes(filter.toLowerCase())){
+    if(name.toLowerCase().includes(filter)){
       container.innerHTML += `
         <div class="product">
           <img src="images/${i}.${getExt(i)}" alt="${name}">
@@ -230,10 +207,6 @@ function render(filter = ""){
       `;
     }
   }
-}
-
-function filterProducts(){
-  render(document.getElementById("searchInput").value);
 }
 
 render();
