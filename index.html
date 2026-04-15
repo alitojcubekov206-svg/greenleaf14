@@ -10,33 +10,23 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f4fff4;
-      color: #222;
     }
 
     header {
       background: linear-gradient(90deg, #2ecc71, #27ae60);
       color: white;
       text-align: center;
-      padding: 25px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
-
-    .container {
       padding: 20px;
     }
 
     .about {
+      text-align: center;
+      padding: 20px;
       max-width: 800px;
       margin: auto;
-      text-align: center;
-      margin-bottom: 40px;
     }
 
-    .about h2 {
+    h2 {
       color: #27ae60;
     }
 
@@ -44,21 +34,17 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
+      padding: 10px;
     }
 
     .product {
-      width: 180px;
+      width: 170px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 8px;
       text-align: center;
-      padding: 10px;
-      transition: 0.2s;
-    }
-
-    .product:hover {
-      transform: scale(1.05);
     }
 
     .product img {
@@ -67,8 +53,8 @@
     }
 
     .product button {
-      margin-top: 8px;
-      padding: 8px 10px;
+      margin-top: 6px;
+      padding: 8px;
       border: none;
       background: #27ae60;
       color: white;
@@ -76,31 +62,17 @@
       cursor: pointer;
     }
 
-    .product button:hover {
-      background: #219150;
-    }
-
     .contact {
       text-align: center;
-      margin-top: 40px;
-    }
-
-    .contact a {
-      display: inline-block;
-      background: #e1306c;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 18px;
+      padding: 30px;
     }
 
     footer {
       text-align: center;
       padding: 15px;
-      margin-top: 40px;
       background: #27ae60;
       color: white;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -109,32 +81,27 @@
 
 <header>
   <h1>Greenleaf Бишкек</h1>
-  <p>Экологичная продукция для дома и здоровья</p>
+  <p>Экологичные товары для дома и здоровья</p>
 </header>
 
-<div class="container">
+<div class="about">
+  <h2>О компании</h2>
+  <p>
+    Greenleaf — это натуральная продукция для дома, ухода и здоровья.
+    Без химии, безопасно для всей семьи.
+  </p>
+</div>
 
-  <section class="about">
-    <h2>О компании</h2>
-    <p>
-      Greenleaf — экологичные товары для дома, ухода за телом и здоровья.
-      Без химии, безопасно для всей семьи.
-    </p>
-    <p>Доставка по Бишкеку. Заказ через Instagram ниже.</p>
-  </section>
+<h2 style="text-align:center;">Каталог товаров</h2>
+<div id="product-list"></div>
 
-  <section>
-    <h2 style="text-align:center; color:#27ae60;">Каталог товаров</h2>
-    <div id="product-list"></div>
-  </section>
-
-  <section class="contact">
-    <h2>Заказать</h2>
-    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+<div class="contact">
+  <h2>Заказать</h2>
+  <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+    <button style="padding:12px 20px;background:#e1306c;color:white;border:none;border-radius:10px;">
       Написать в Instagram
-    </a>
-  </section>
-
+    </button>
+  </a>
 </div>
 
 <footer>
@@ -143,12 +110,11 @@
 
 <script>
 const container = document.getElementById("product-list");
-const totalProducts = 84;
 
-for (let i = 1; i <= totalProducts; i++) {
+for (let i = 1; i <= 84; i++) {
   container.innerHTML += `
     <div class="product">
-      <img src="images/${i}.jfif" alt="Greenleaf ${i}">
+      <img src="images/${i}.jfif" alt="product ${i}">
       <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
         <button>Заказать</button>
       </a>
