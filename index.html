@@ -22,12 +22,13 @@
     .about {
       text-align: center;
       padding: 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
 
     h2 {
       color: #27ae60;
+      text-align: center;
     }
 
     #product-list {
@@ -67,12 +68,22 @@
       padding: 30px;
     }
 
+    .contact a button {
+      padding: 12px 20px;
+      background: #e1306c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
     footer {
       text-align: center;
       padding: 15px;
       background: #27ae60;
       color: white;
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -85,22 +96,30 @@
 </header>
 
 <div class="about">
-  <h2>О компании</h2>
+  <h2>О компании / Компания жөнүндө</h2>
   <p>
-    Greenleaf — это натуральная продукция для дома, ухода и здоровья.
-    Без химии, безопасно для всей семьи.
+    <b>Русский:</b><br>
+    Greenleaf — это бренд экологичных товаров для дома, ухода за телом и здоровья. Мы предлагаем безопасную продукцию без вредной химии, которая подходит для всей семьи. Наша цель — сделать жизнь чище, безопаснее и удобнее.
+  </p>
+
+  <p>
+    <b>Кыргызча:</b><br>
+    Greenleaf — бул үй үчүн, ден соолук жана жеке кам көрүү үчүн экологиялык таза товарлардын бренди. Биз зыяндуу химиясы жок, коопсуз продукцияны сунуштайбыз. Биздин максат — адамдардын жашоосун таза, коопсуз жана ыңгайлуу кылуу.
   </p>
 </div>
 
-<h2 style="text-align:center;">Каталог товаров</h2>
+<h2>Каталог товаров</h2>
 <div id="product-list"></div>
 
 <div class="contact">
   <h2>Заказать</h2>
+
   <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
-    <button style="padding:12px 20px;background:#e1306c;color:white;border:none;border-radius:10px;">
-      Написать в Instagram
-    </button>
+    <button>Instagram</button>
+  </a>
+
+  <a href="https://wa.me/996700713905" target="_blank">
+    <button style="background:#25D366;">WhatsApp</button>
   </a>
 </div>
 
@@ -112,9 +131,16 @@
 const container = document.getElementById("product-list");
 
 for (let i = 1; i <= 84; i++) {
+
+  let ext = "jfif";
+
+  if (i <= 5) {
+    ext = "png";
+  }
+
   container.innerHTML += `
     <div class="product">
-      <img src="images/${i}.jfif" alt="product ${i}">
+      <img src="images/${i}.${ext}" alt="product ${i}">
       <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
         <button>Заказать</button>
       </a>
