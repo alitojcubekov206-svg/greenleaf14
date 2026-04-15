@@ -1,138 +1,159 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>Greenleaf Bishkek</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greenleaf Бишкек</title>
 
-<style>
-body{margin:0;font-family:Arial;background:#f6fff6;}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4fff4;
+      color: #222;
+    }
 
-header{
-background:#2e7d32;
-color:white;
-text-align:center;
-padding:25px;
-}
+    header {
+      background: linear-gradient(90deg, #2ecc71, #27ae60);
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-padding:20px;
-}
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
 
-.card{
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-cursor:pointer;
-transition:0.2s;
-text-align:center;
-}
+    .container {
+      padding: 20px;
+    }
 
-.card:hover{transform:scale(1.03);}
+    .about {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
+    .about h2 {
+      color: #27ae60;
+    }
 
-.card p{
-margin:10px;
-font-weight:bold;
-}
+    #product-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
 
-.modal{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-}
+    .product {
+      width: 180px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 10px;
+      transition: 0.2s;
+    }
 
-.box{
-background:white;
-padding:20px;
-border-radius:12px;
-text-align:center;
-max-width:300px;
-}
+    .product:hover {
+      transform: scale(1.05);
+    }
 
-.box img{
-width:100%;
-border-radius:10px;
-}
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+    }
 
-.btn{
-display:inline-block;
-margin-top:10px;
-background:#2e7d32;
-color:white;
-padding:10px 15px;
-border-radius:20px;
-text-decoration:none;
-}
-</style>
+    .product button {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border: none;
+      background: #27ae60;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background: #219150;
+    }
+
+    .contact {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact a {
+      display: inline-block;
+      background: #e1306c;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      background: #27ae60;
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<h1>Greenleaf Bishkek</h1>
-<p>Каталог продукции</p>
+  <h1>Greenleaf Бишкек</h1>
+  <p>Экологичная продукция для дома и здоровья</p>
 </header>
 
-<div class="products">
+<div class="container">
 
-<div class="card" onclick="openModal('Крем для лица','https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb','Увлажняет и питает кожу')">
-<img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb">
-<p>Крем для лица</p>
+  <section class="about">
+    <h2>О компании</h2>
+    <p>
+      Greenleaf — экологичные товары для дома, ухода за телом и здоровья.
+      Без химии, безопасно для всей семьи.
+    </p>
+    <p>Доставка по Бишкеку. Заказ через Instagram ниже.</p>
+  </section>
+
+  <section>
+    <h2 style="text-align:center; color:#27ae60;">Каталог товаров</h2>
+    <div id="product-list"></div>
+  </section>
+
+  <section class="contact">
+    <h2>Заказать</h2>
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+      Написать в Instagram
+    </a>
+  </section>
+
 </div>
 
-<div class="card" onclick="openModal('Шампунь','https://images.unsplash.com/photo-1612810436541-336d4d1b5f6c','Укрепляет волосы')">
-<img src="https://images.unsplash.com/photo-1612810436541-336d4d1b5f6c">
-<p>Шампунь</p>
-</div>
-
-<div class="card" onclick="openModal('Средства для дома','https://images.unsplash.com/photo-1581578731548-c64695cc6952','Экологичная уборка')">
-<img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
-<p>Средства для дома</p>
-</div>
-
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="box">
-<h2 id="title"></h2>
-<img id="img">
-<p id="desc"></p>
-
-<a class="btn" href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
-Заказать
-</a>
-
-<br><br>
-<button onclick="closeModal()">Закрыть</button>
-</div>
-</div>
+<footer>
+  © 2026 Greenleaf Бишкек
+</footer>
 
 <script>
-function openModal(title,img,desc){
-document.getElementById("modal").style.display="flex";
-document.getElementById("title").innerText=title;
-document.getElementById("img").src=img;
-document.getElementById("desc").innerText=desc;
-}
+const container = document.getElementById("product-list");
+const totalProducts = 84;
 
-function closeModal(){
-document.getElementById("modal").style.display="none";
+for (let i = 1; i <= totalProducts; i++) {
+  container.innerHTML += `
+    <div class="product">
+      <img src="images/${i}.jfif" alt="Greenleaf ${i}">
+      <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">
+        <button>Заказать</button>
+      </a>
+    </div>
+  `;
 }
 </script>
 
