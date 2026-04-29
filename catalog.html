@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Каталог — Green Leaf Global Shop</title>
+<meta name="description" content="Каталог эко-товаров Green Leaf. Натуральная косметика, здоровье, бытовая химия. Цены в сомах (KGS).">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">🌿</div><span>Green Leaf</span></a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html" class="active">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="cart.html">🛒 Корзина</a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="nav-search">
+    <span class="si">🔍</span>
+    <input id="nav-search-input" type="text" placeholder="Поиск товаров...">
+  </div>
+  <div class="nav-actions">
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="nav-ig-btn" title="@greenleaf_bishkek14">📷</a>
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-login">Войти</a>
+      <a href="login.html" class="btn-nav btn-nav-reg">Регистрация</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+    <a href="cart.html" style="font-size:1.3rem;text-decoration:none" title="Корзина">🛒</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="section-label">Магазин</div>
+    <h1 class="section-title">Каталог <span>товаров</span></h1>
+    <p class="section-subtitle">30+ натуральных эко-товаров с ценами в сомах</p>
+  </div>
+
+  <!-- Search -->
+  <div class="search-bar-wrap">
+    <span class="sbi">🔍</span>
+    <input id="catalog-search" class="search-bar" type="text" placeholder="Найти товар по названию или описанию...">
+  </div>
+
+  <!-- Filter chips -->
+  <div class="filter-chips">
+    <button class="chip active" data-filter="all">Все товары</button>
+    <button class="chip" data-filter="chemistry">🧴 Бытовая химия</button>
+    <button class="chip" data-filter="cosmetics">💄 Косметика</button>
+    <button class="chip" data-filter="health">💊 Здоровье</button>
+    <button class="chip" data-filter="eco">♻️ Эко товары</button>
+  </div>
+
+  <!-- Result count -->
+  <p style="font-size:.85rem;color:var(--gray400);margin-bottom:20px">
+    Найдено: <strong id="result-count" style="color:var(--g700)">30 товаров</strong>
+  </p>
+
+  <!-- Products grid -->
+  <div class="products-grid" id="products-grid">
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray400)">
+      <div class="spinner" style="margin:0 auto 12px"></div>
+      <p>Загружаем товары...</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-icon">🌿</div><span style="color:white">Green Leaf Global Shop</span></div>
+      <p>Натуральные эко-товары для здоровья и заботы о планете.</p>
+      <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="footer-ig">
+        <span class="footer-ig-icon">📷</span><span>Наш Instagram: @greenleaf_bishkek14</span>
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Категории</h4>
+      <ul>
+        <li><a href="catalog.html?cat=chemistry">Бытовая химия</a></li>
+        <li><a href="catalog.html?cat=cosmetics">Косметика</a></li>
+        <li><a href="catalog.html?cat=health">Здоровье</a></li>
+        <li><a href="catalog.html?cat=eco">Эко товары</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Магазин</h4>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="delivery.html">Доставка</a></li>
+        <li><a href="cart.html">Корзина</a></li>
+        <li><a href="login.html">Войти</a></li>
+        <li><a href="profile.html">Кабинет</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Правила</h4>
+      <ul>
+        <li><a href="privacy.html">Конфиденциальность</a></li>
+        <li><a href="terms.html">Условия</a></li>
+        <li><a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">📷 Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Green Leaf Global Shop</span>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="footer-soc">📷</a>
+    </div>
+  </div>
+</footer>
+
+<button class="ag-btn" id="ag-btn">🌌 Anti-Gravity</button>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/gravity.js"></script>
+</body>
+</html>

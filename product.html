@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Товар — Green Leaf Global Shop</title>
+<meta name="description" content="Подробная информация о товаре Green Leaf.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.product-detail{padding:36px clamp(16px,5vw,80px) 80px;max-width:1100px;margin:0 auto}
+.breadcrumb{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--gray400);margin-bottom:28px;flex-wrap:wrap}
+.breadcrumb a{color:var(--g600)}
+
+.prod-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+
+/* Image gallery */
+.prod-gallery{position:sticky;top:90px}
+.prod-img-main{aspect-ratio:1;border-radius:var(--rxl);display:flex;align-items:center;justify-content:center;font-size:10rem;box-shadow:var(--shlg);margin-bottom:12px}
+.prod-thumbs{display:flex;gap:10px;flex-wrap:wrap}
+.prod-thumb{width:68px;height:68px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.9rem;border:2.5px solid transparent;cursor:pointer;transition:all .22s}
+.prod-thumb.active,.prod-thumb:hover{border-color:var(--g500);box-shadow:var(--shg)}
+
+/* Info */
+.prod-detail-cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);margin-bottom:8px}
+.prod-detail-name{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2rem);font-weight:700;margin-bottom:10px;line-height:1.2}
+.halal-label{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:#dcfce7;color:#166534;border-radius:var(--rfull);font-size:.78rem;font-weight:700;margin-bottom:16px}
+.prod-price-wrap{margin:16px 0 24px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.prod-price{font-size:2.2rem;font-weight:800;color:var(--g700)}
+.prod-price-full{font-size:1.1rem;text-decoration:line-through;color:var(--gray400);margin-bottom:4px}
+.prod-discount-badge{background:#fef2f2;color:#dc2626;padding:4px 10px;border-radius:var(--rfull);font-size:.78rem;font-weight:700}
+.prod-detail-desc{color:var(--gray600);line-height:1.75;margin-bottom:24px;font-size:.95rem}
+
+.prod-specs{background:var(--gray100);border-radius:var(--rmd);padding:18px;margin-bottom:24px}
+.prod-specs-title{font-size:.82rem;font-weight:700;color:var(--gray700);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.spec-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray200);font-size:.85rem}
+.spec-row:last-child{border:none}
+.spec-key{color:var(--gray600)}.spec-val{font-weight:600;color:var(--gray900)}
+
+.prod-actions{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:16px}
+.qty-sel{display:flex;align-items:center;border:1.5px solid var(--gray200);border-radius:var(--rfull);overflow:hidden}
+.qty-btn{padding:10px 16px;font-size:1rem;font-weight:700;color:var(--g700);background:none;border:none;cursor:pointer;transition:background .18s}
+.qty-btn:hover{background:var(--g50)}
+.qty-val{padding:10px 14px;font-weight:700;font-size:.95rem;min-width:38px;text-align:center}
+
+.wa-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:var(--rfull);background:#25D366;color:white;font-weight:700;font-size:.9rem;border:none;cursor:pointer;text-decoration:none;transition:all .25s}
+.wa-btn:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.35)}
+
+.discount-info{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:var(--rmd);padding:14px 16px;margin-bottom:20px;font-size:.85rem;color:#166534}
+.discount-info a{color:var(--g700);font-weight:700}
+
+.related-section{margin-top:68px}
+
+/* Image gallery slots */
+.gallery-slot{font-size:7rem}
+
+@media(max-width:900px){.prod-detail-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.prod-img-main{font-size:6rem}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">🌿</div><span>Green Leaf</span></a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="cart.html">🛒 Корзина</a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="nav-search">
+    <span class="si">🔍</span>
+    <input id="nav-search-input" type="text" placeholder="Поиск товаров...">
+  </div>
+  <div class="nav-actions">
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="nav-ig-btn" title="@greenleaf_bishkek14">📷</a>
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-login">Войти</a>
+      <a href="login.html" class="btn-nav btn-nav-reg">Регистрация</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="product-detail">
+  <div class="breadcrumb" id="breadcrumb">
+    <a href="index.html">Главная</a> › <a href="catalog.html">Каталог</a> › <span id="breadcrumb-name">...</span>
+  </div>
+
+  <div class="prod-detail-grid" id="product-detail-content">
+    <div style="text-align:center;color:var(--gray400);padding:60px">
+      <div class="spinner" style="margin:0 auto 12px"></div>
+      <p>Загружаем товар...</p>
+    </div>
+  </div>
+
+  <!-- Related products -->
+  <div class="related-section" id="related-section" style="display:none">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+      <div>
+        <div class="section-label">Каталог</div>
+        <h2 class="section-title">Похожие <span>товары</span></h2>
+      </div>
+      <a href="catalog.html" class="btn btn-outline btn-sm">Все товары →</a>
+    </div>
+    <div class="products-grid" id="related-grid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-icon">🌿</div><span style="color:white">Green Leaf Global Shop</span></div>
+      <p>Натуральные эко-товары для здоровья и заботы о планете. Бишкек, Кыргызстан.</p>
+    </div>
+    <div class="footer-col"><h4>Каталог</h4><ul>
+      <li><a href="catalog.html?cat=chemistry">Бытовая химия</a></li>
+      <li><a href="catalog.html?cat=cosmetics">Косметика</a></li>
+      <li><a href="catalog.html?cat=health">Здоровье</a></li>
+      <li><a href="catalog.html?cat=eco">Эко товары</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>О магазине</h4><ul>
+      <li><a href="delivery.html">Доставка</a></li>
+      <li><a href="privacy.html">Конф-ть</a></li>
+      <li><a href="terms.html">Условия</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Green Leaf Global Shop. Все права защищены.</span></div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalog.js"></script>
+<script>
+const CART_KEY = 'glg_cart';
+function getCart() { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+function saveCart(cart) { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+let productQty = 1;
+
+function addToCart(productId, qty = 1) {
+  const cart = getCart();
+  const existing = cart.find(x => x.id === productId);
+  if (existing) existing.qty += qty;
+  else cart.push({ id: productId, qty });
+  saveCart(cart);
+  showNotif(`Добавлено в корзину (${qty} шт.) 🛒`, 'success');
+}
+
+function getCategoryClass(cat) {
+  return { chemistry: 'bg-chemistry', cosmetics: 'bg-cosmetics', health: 'bg-health', eco: 'bg-eco' }[cat] || 'bg-eco';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  if (!id) { window.location.href = 'catalog.html'; return; }
+
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product) { window.location.href = 'catalog.html'; return; }
+
+  // Update meta
+  document.title = `${product.name} — Green Leaf`;
+  document.getElementById('breadcrumb-name').textContent = product.name;
+
+  const user = getCurrentUser ? getCurrentUser() : null;
+  const discount = user ? 0.5 : 1;
+  const price = Math.round(product.price * discount);
+  const hasDiscount = user;
+
+  // Simulated extra images (emojis as gallery items)
+  const galleryEmojis = [product.emoji, '📦', '🌿', '✨'];
+
+  const bgClass = getCategoryClass(product.cat);
+
+  const tagHtml = product.tag ? `<span class="card-tag tag-${product.tag}" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:12px">${{ hit:'Хит', new:'Новинка', top:'Топ', premium:'Premium', eco:'Эко', rec:'Рекомендуем' }[product.tag] || product.tag}</span>` : '';
+
+  const discountBanner = user
+    ? `<div class="discount-info">✅ <strong>Скидка 50% применена!</strong> Вы зарегистрированы как <strong>${user.name || user.email}</strong>.</div>`
+    : `<div class="discount-info">💡 <a href="login.html">Войдите или зарегистрируйтесь</a> — получите <strong>скидку 50%</strong> на всё!</div>`;
+
+  // Specs
+  const specs = [
+    ['Категория', product.catName],
+    ['Состав', 'Натуральные ингредиенты без химии'],
+    ['Стандарт', 'Халяльный продукт ✅'],
+    ['Происхождение', 'Экологически чистое производство'],
+    ['Доставка', 'По Бишкеку в день заказа'],
+  ];
+  const specsHtml = specs.map(([k, v]) => `<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join('');
+
+  const thumbsHtml = galleryEmojis.map((em, i) => `
+    <div class="prod-thumb ${bgClass} ${i === 0 ? 'active' : ''}" onclick="setThumb(this,'${em}')">${em}</div>
+  `).join('');
+
+  const waText = `Здравствуйте! Меня интересует товар: ${product.name}${hasDiscount ? ' (скидка 50%)' : ''} — ${formatPrice(price)}`;
+
+  document.getElementById('product-detail-content').innerHTML = `
+    <div class="prod-gallery">
+      <div class="prod-img-main ${bgClass}" id="main-img">${product.emoji}</div>
+      <div class="prod-thumbs">${thumbsHtml}</div>
+    </div>
+    <div class="prod-info">
+      ${tagHtml}
+      <div class="prod-detail-cat">${product.catName}</div>
+      <h1 class="prod-detail-name">${product.name}</h1>
+      <div class="halal-label">✅ Халяль</div>
+      ${discountBanner}
+      <div class="prod-price-wrap">
+        <div>
+          ${hasDiscount ? `<div class="prod-price-full">${formatPrice(product.price)}</div>` : ''}
+          <span class="prod-price">${formatPrice(price)}</span>
+        </div>
+        ${hasDiscount ? `<span class="prod-discount-badge">−50%</span>` : ''}
+      </div>
+      <p class="prod-detail-desc">${product.desc}. Производится из натуральных экологически чистых компонентов. Безопасно для всей семьи и окружающей среды.</p>
+      <div class="prod-specs">
+        <div class="prod-specs-title">Характеристики</div>
+        ${specsHtml}
+      </div>
+      <div class="prod-actions">
+        <div class="qty-sel">
+          <button class="qty-btn" onclick="if(productQty>1){productQty--;document.getElementById('qty-display').textContent=productQty}">−</button>
+          <span class="qty-val" id="qty-display">1</span>
+          <button class="qty-btn" onclick="productQty++;document.getElementById('qty-display').textContent=productQty">+</button>
+        </div>
+        <button class="btn btn-primary" onclick="addToCart(${product.id}, productQty); showNotif('Добавлено '+productQty+' шт.', 'success')">
+          🛒 В корзину
+        </button>
+      </div>
+      <a class="wa-btn" href="https://wa.me/996700713905?text=${encodeURIComponent(waText)}" target="_blank">
+        📲 Заказать через WhatsApp
+      </a>
+    </div>
+  `;
+
+  // Related products
+  const related = PRODUCTS.filter(p => p.cat === product.cat && p.id !== product.id).slice(0, 4);
+  if (related.length > 0) {
+    document.getElementById('related-section').style.display = '';
+    document.getElementById('related-grid').innerHTML = related.map(buildCardHtml).join('');
+  }
+});
+
+function setThumb(el, emoji) {
+  document.querySelectorAll('.prod-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('main-img').textContent = emoji;
+}
+</script>
+</body>
+</html>

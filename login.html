@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Войти — Green Leaf Global Shop</title>
+<meta name="description" content="Войдите в Greenleaf, чтобы получить скидку 50% на все товары.">
+<link rel="stylesheet" href="css/style.css">
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+.auth-page{min-height:calc(100vh - var(--navh));display:flex;align-items:center;justify-content:center;padding:40px 16px;background:linear-gradient(135deg,var(--g50) 0%,white 60%)}
+.auth-box{width:100%;max-width:440px;background:white;border-radius:var(--rxl);box-shadow:var(--shxl);overflow:hidden}
+.auth-header{background:linear-gradient(135deg,var(--g600),var(--g800));padding:30px;text-align:center;color:white}
+.auth-header .logo-icon{margin:0 auto 10px;width:48px;height:48px;font-size:1.5rem;background:rgba(255,255,255,.2);box-shadow:none}
+.auth-header h1{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+.auth-header p{font-size:.82rem;opacity:.8;margin-top:3px}
+.auth-tabs{display:flex;border-bottom:1px solid var(--gray100)}
+.auth-tab{flex:1;padding:14px;font-size:.87rem;font-weight:600;color:var(--gray400);transition:all var(--tr);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.auth-tab.active{color:var(--g700);border-color:var(--g500)}
+.auth-tab-content{display:none;padding:24px}
+.auth-tab-content.active{display:block}
+
+/* Partner info banner */
+.partner-banner{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:14px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px}
+.partner-banner-icon{font-size:1.5rem;flex-shrink:0}
+.partner-banner strong{display:block;color:var(--g700);font-size:.9rem;margin-bottom:2px}
+.partner-banner span{color:var(--g600);font-size:.78rem}
+
+.google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  padding:12px 20px;border-radius:var(--rfull);border:1.5px solid var(--gray200);background:white;
+  font-weight:600;font-size:.88rem;color:var(--gray700);cursor:pointer;transition:all var(--tr);margin-bottom:4px}
+.google-btn:hover{border-color:#4285F4;box-shadow:0 4px 16px rgba(66,133,244,.2);transform:translateY(-1px)}
+.google-logo{width:18px;height:18px}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">🌿</div><span>Green Leaf</span></a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="cart.html">🛒 Корзина</a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="nav-actions">
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-reg active">Войти</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-box">
+    <div class="auth-header">
+      <div class="logo-icon">🌿</div>
+      <h1>Green Leaf Global Shop</h1>
+      <p>Войдите и получите скидку 50% на всё</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Войти</button>
+      <button class="auth-tab" id="tab-reg" onclick="switchTab('reg')">Регистрация</button>
+      <button class="auth-tab" id="tab-partner" onclick="switchTab('partner')">🔑 Цены партнёра</button>
+    </div>
+
+    <!-- Обычный вход -->
+    <div class="auth-tab-content active" id="tc-login">
+      <div class="partner-banner">
+        <span class="partner-banner-icon">💡</span>
+        <div>
+          <strong>Войдите чтобы открыть скидку 50%!</strong>
+          <span>Все зарегистрированные пользователи получают скидку на все товары.</span>
+        </div>
+      </div>
+
+      <div id="login-google-wrap" style="margin-bottom:16px">
+        <!-- Google Sign-In is rendered here by GIS -->
+        <button class="google-btn" id="google-login-btn" onclick="signInWithGoogleFallback()">
+          <svg class="google-logo" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/><path fill="#34A853" d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09C3.515 21.3 7.615 24 12.255 24z"/><path fill="#FBBC05" d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62h-3.98a11.86 11.86 0 000 10.76l3.98-3.09z"/><path fill="#EA4335" d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C18.205 1.19 15.495 0 12.255 0c-4.64 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+          Войти через Google
+        </button>
+      </div>
+
+      <!-- Отображается если Google GIS загружен -->
+      <div id="g_id_onload"
+           data-client_id="191093949474-YOUR_CLIENT_ID.apps.googleusercontent.com"
+           data-callback="handleGoogleCredential"
+           data-auto_prompt="false"
+           style="display:none">
+      </div>
+
+      <div class="auth-divider"><div class="auth-divider-line"></div><span class="auth-divider-text">или войдите по email</span><div class="auth-divider-line"></div></div>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <div class="input-wrap">
+          <span class="input-icon">📧</span>
+          <input id="login-email" type="email" class="form-input" placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="form-err" id="login-email-err">Введите корректный email</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Пароль</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input id="login-pass" type="password" class="form-input" placeholder="Ваш пароль" autocomplete="current-password">
+          <button class="pass-toggle" onclick="togglePass('login-pass',this)">👁</button>
+        </div>
+        <div class="form-err" id="login-pass-err">Введите пароль (минимум 6 символов)</div>
+      </div>
+      <div id="login-err" style="color:var(--error);font-size:.82rem;margin-bottom:10px;display:none"></div>
+      <button id="login-submit" class="btn btn-primary" style="width:100%;margin-top:4px" onclick="handleLogin()">Войти</button>
+      <p style="text-align:center;font-size:.78rem;color:var(--gray400);margin-top:14px">
+        Нет аккаунта? <button onclick="switchTab('reg')" style="color:var(--g600);font-weight:600;background:none;border:none;cursor:pointer">Зарегистрироваться</button>
+      </p>
+    </div>
+
+    <!-- Регистрация -->
+    <div class="auth-tab-content" id="tc-reg">
+      <div class="partner-banner">
+        <span class="partner-banner-icon">🎁</span>
+        <div>
+          <strong>Скидка 50% навсегда!</strong>
+          <span>После регистрации скидка применяется автоматически ко всем товарам.</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Имя</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input id="reg-name" type="text" class="form-input" placeholder="Ваше имя" autocomplete="given-name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <div class="input-wrap">
+          <span class="input-icon">📧</span>
+          <input id="reg-email" type="email" class="form-input" placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="form-err" id="reg-email-err">Введите корректный email</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Пароль</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input id="reg-pass" type="password" class="form-input" placeholder="Минимум 6 символов" autocomplete="new-password">
+          <button class="pass-toggle" onclick="togglePass('reg-pass',this)">👁</button>
+        </div>
+        <div class="form-err" id="reg-pass-err">Пароль слишком короткий</div>
+      </div>
+      <div id="reg-err" style="color:var(--error);font-size:.82rem;margin-bottom:10px;display:none"></div>
+      <button class="btn btn-primary" style="width:100%" onclick="handleRegister()">Зарегистрироваться 🌿</button>
+    </div>
+
+    <!-- Вход с кодом партнёра -->
+    <div class="auth-tab-content" id="tc-partner">
+      <div class="partner-banner">
+        <span class="partner-banner-icon">🔑</span>
+        <div>
+          <strong>Цены партнёра Greenleaf</strong>
+          <span>Введите имя и код партнёра чтобы получить доступ к оптовым скидкам.</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Имя партнёра</label>
+        <div class="input-wrap">
+          <span class="input-icon">🤝</span>
+          <input id="partner-name" type="text" class="form-input" placeholder="Введите ваше имя">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Код партнёра / Пароль</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔑</span>
+          <input id="partner-code" type="password" class="form-input" placeholder="Ваш код доступа">
+          <button class="pass-toggle" onclick="togglePass('partner-code',this)">👁</button>
+        </div>
+      </div>
+      <div id="partner-err" style="color:var(--error);font-size:.82rem;margin-bottom:10px;display:none"></div>
+      <button class="btn btn-primary" style="width:100%;background:linear-gradient(135deg,#15803d,#14532d)" onclick="handlePartnerLogin()">Открыть цены партнёра 🔓</button>
+      <p style="text-align:center;font-size:.76rem;color:var(--gray400);margin-top:12px">
+        Код партнёра выдаётся индивидуально. Для получения кода свяжитесь с нами в
+        <a href="https://wa.me/996700713905" target="_blank" style="color:var(--g600);font-weight:600">WhatsApp</a>.
+      </p>
+
+      <div class="auth-divider" style="margin-top:16px"><div class="auth-divider-line"></div><span class="auth-divider-text">Уже есть аккаунт?</span><div class="auth-divider-line"></div></div>
+      <button class="btn btn-outline" style="width:100%" onclick="switchTab('login')">Войти по email</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-icon">🌿</div><span style="color:white">Green Leaf</span></div>
+      <p>Натуральные эко-товары для здоровья и заботы о планете.</p>
+    </div>
+    <div class="footer-col"><h4>Разделы</h4><ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="delivery.html">Доставка</a></li>
+      <li><a href="privacy.html">Конф-ть</a></li>
+      <li><a href="terms.html">Условия</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Green Leaf Global Shop. Все права защищены.</span></div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script>
+/* ── Tab switching ── */
+function switchTab(tab) {
+  ['login','reg','partner'].forEach(t => {
+    document.getElementById('tab-'+t)?.classList.toggle('active', t===tab);
+    document.getElementById('tc-'+t)?.classList.toggle('active', t===tab);
+  });
+}
+
+/* ── Toggle password visibility ── */
+function togglePass(id, btn) {
+  const inp = document.getElementById(id);
+  const isHidden = inp.type === 'password';
+  inp.type = isHidden ? 'text' : 'password';
+  btn.textContent = isHidden ? '🙈' : '👁';
+}
+
+/* ── Email/password login ── */
+function handleLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-err');
+  errEl.style.display = 'none';
+  if (!email || !email.includes('@')) {
+    document.getElementById('login-email-err').classList.add('show'); return;
+  }
+  document.getElementById('login-email-err').classList.remove('show');
+  if (!pass || pass.length < 6) {
+    document.getElementById('login-pass-err').classList.add('show'); return;
+  }
+  document.getElementById('login-pass-err').classList.remove('show');
+
+  const result = login(email, pass);
+  if (result.success) {
+    showNotif('Добро пожаловать! Скидка 50% активирована 🎉', 'success');
+    setTimeout(() => { window.location.href = 'catalog.html'; }, 900);
+  } else {
+    errEl.textContent = result.error || 'Неверный email или пароль';
+    errEl.style.display = 'block';
+  }
+}
+
+/* ── Registration ── */
+function handleRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const errEl = document.getElementById('reg-err');
+  errEl.style.display = 'none';
+  if (!email || !email.includes('@')) {
+    document.getElementById('reg-email-err').classList.add('show'); return;
+  }
+  document.getElementById('reg-email-err').classList.remove('show');
+  if (!pass || pass.length < 6) {
+    document.getElementById('reg-pass-err').classList.add('show'); return;
+  }
+  document.getElementById('reg-pass-err').classList.remove('show');
+
+  const result = register(name, email, pass);
+  if (result.success) {
+    showNotif('Аккаунт создан! Скидка 50% активирована 🌿', 'success');
+    setTimeout(() => { window.location.href = 'catalog.html'; }, 900);
+  } else {
+    errEl.textContent = result.error || 'Ошибка регистрации';
+    errEl.style.display = 'block';
+  }
+}
+
+/* ── Partner code login ── */
+const PARTNER_CODES = {
+  'greenleaf2026': 'Партнёр Greenleaf',
+  'partner50': 'VIP Партнёр',
+  'bishkek14': 'Партнёр Бишкек',
+};
+
+function handlePartnerLogin() {
+  const name = document.getElementById('partner-name').value.trim() || 'Партнёр';
+  const code = document.getElementById('partner-code').value.trim();
+  const errEl = document.getElementById('partner-err');
+  errEl.style.display = 'none';
+
+  if (!code) { errEl.textContent = 'Введите код партнёра'; errEl.style.display = 'block'; return; }
+
+  const partnerLevel = PARTNER_CODES[code.toLowerCase()];
+  if (partnerLevel) {
+    const partnerUser = {
+      id: 'partner_' + Date.now(),
+      name: name,
+      email: 'partner@greenleaf.kg',
+      isPartner: true,
+      partnerLevel,
+      loginTime: Date.now()
+    };
+    localStorage.setItem('glg_user', JSON.stringify(partnerUser));
+    showNotif(`Добро пожаловать, ${name}! Цены партнёра открыты 🔓`, 'success');
+    setTimeout(() => { window.location.href = 'catalog.html'; }, 900);
+  } else {
+    errEl.textContent = 'Неверный код партнёра. Обратитесь в WhatsApp для получения кода.';
+    errEl.style.display = 'block';
+  }
+}
+
+/* ── Google auth fallback (shows modal until real CLIENT_ID is set) ── */
+function handleGoogleCredential(response) {
+  try {
+    // Decode JWT payload
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    const user = {
+      id: 'g_' + payload.sub,
+      name: payload.name,
+      email: payload.email,
+      avatar: payload.picture,
+      isGoogleUser: true,
+      loginTime: Date.now()
+    };
+    localStorage.setItem('glg_user', JSON.stringify(user));
+    showNotif(`Вы вошли через Google: ${user.name} 🎉`, 'success');
+    setTimeout(() => { window.location.href = 'catalog.html'; }, 900);
+  } catch(e) {
+    showNotif('Ошибка входа через Google', 'error');
+  }
+}
+
+function signInWithGoogleFallback() {
+  // Quick demo login until real Google CLIENT_ID is configured
+  const demoUser = {
+    id: 'g_demo_' + Date.now(),
+    name: 'Google Пользователь',
+    email: 'user@gmail.com',
+    isGoogleUser: true,
+    loginTime: Date.now()
+  };
+  localStorage.setItem('glg_user', JSON.stringify(demoUser));
+  showNotif('Демо-вход через Google выполнен! ✅', 'success');
+  setTimeout(() => { window.location.href = 'catalog.html'; }, 900);
+}
+
+/* ── Redirect if already logged in ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const user = getCurrentUser();
+  if (user) window.location.href = 'profile.html';
+
+  // Enter on password fields
+  document.getElementById('login-pass')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleLogin();
+  });
+  document.getElementById('partner-code')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handlePartnerLogin();
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Корзина — Green Leaf Global Shop</title>
+<meta name="description" content="Ваша корзина покупок Green Leaf. Эко-товары с доставкой по Бишкеку.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.cart-page{padding:44px clamp(16px,5vw,80px) 80px;max-width:1100px;margin:0 auto}
+.cart-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
+.cart-items-box,.cart-summary,.checkout-form-box{background:white;border-radius:20px;box-shadow:var(--shmd)}
+.cart-items-head{padding:20px 24px;border-bottom:1px solid var(--gray100);display:flex;justify-content:space-between;align-items:center}
+.cart-items-head h2{font-family:'Playfair Display',serif;font-size:1.3rem}
+.cart-item{display:flex;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid var(--gray100);transition:background .2s}
+.cart-item:last-child{border:none}
+.cart-item:hover{background:#fafff9}
+.cart-item-img{width:72px;height:72px;border-radius:14px;overflow:hidden;flex-shrink:0;position:relative;background:var(--gray100)}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-img .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-weight:700;font-size:.95rem;margin-bottom:3px}
+.cart-item-cat{font-size:.75rem;color:var(--gray400);text-transform:uppercase;letter-spacing:.06em}
+.cart-item-price{font-weight:800;color:var(--g700);font-size:1.05rem;white-space:nowrap}
+.cart-item-qty{display:flex;align-items:center;border:1.5px solid var(--gray200);border-radius:var(--rfull);overflow:hidden}
+.cart-qty-btn{padding:6px 12px;font-weight:700;font-size:1rem;color:var(--g700);background:none;border:none;cursor:pointer;transition:background .18s}
+.cart-qty-btn:hover{background:var(--g50)}
+.cart-qty-val{padding:6px 8px;font-weight:700;min-width:28px;text-align:center;font-size:.9rem}
+.cart-remove{background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--gray400);margin-left:8px;transition:color .18s;flex-shrink:0}
+.cart-remove:hover{color:#ef4444}
+.cart-summary{padding:24px;position:sticky;top:90px}
+.cart-summary h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:18px}
+.sum-row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:10px}
+.sum-row.total{font-weight:800;font-size:1.1rem;padding-top:12px;border-top:1px solid var(--gray100);margin-top:6px}
+.sum-delivery-badge{padding:10px 14px;border-radius:12px;font-size:.84rem;font-weight:600;margin:14px 0;display:flex;align-items:center;gap:8px}
+.sum-delivery-badge.free{background:#dcfce7;color:#166534}
+.sum-delivery-badge.paid{background:#fef9c3;color:#92400e}
+.delivery-progress{background:var(--gray100);border-radius:var(--rfull);height:8px;margin:8px 0 4px;overflow:hidden}
+.delivery-progress-bar{height:100%;border-radius:var(--rfull);background:linear-gradient(90deg,var(--g400),var(--g600));transition:width .5s ease}
+.delivery-hint{font-size:.76rem;color:var(--gray400);text-align:center;margin-bottom:14px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--gray400)}
+.cart-empty .ei{font-size:3.5rem;margin-bottom:16px}
+.cart-empty h3{font-size:1.2rem;color:var(--gray700);margin-bottom:8px}
+.wa-order-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:var(--rfull);background:#25D366;color:white;font-weight:700;font-size:1rem;border:none;cursor:pointer;text-decoration:none;margin-top:10px;transition:all .25s}
+.wa-order-btn:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.35)}
+/* Checkout form */
+.checkout-form-box{padding:28px;margin-top:24px}
+.checkout-form-title{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--gray100)}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf-group{margin-bottom:14px}
+.cf-label{display:block;font-size:.82rem;font-weight:600;color:var(--gray700);margin-bottom:4px}
+.cf-input,.cf-textarea{width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--gray200);font-family:inherit;font-size:.88rem;outline:none;background:var(--gray100);transition:.2s}
+.cf-input:focus,.cf-textarea:focus{border-color:var(--g400);background:white;box-shadow:0 0 0 3px rgba(34,197,94,.08)}
+.cf-textarea{min-height:80px;resize:vertical}
+@media(max-width:768px){.cart-grid{grid-template-columns:1fr}.form-row-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">🌿</div><span>Green Leaf</span></a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="cart.html" class="active">🛒 Корзина</a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="nav-actions">
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="nav-ig-btn">📷</a>
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-login">Войти</a>
+      <a href="login.html" class="btn-nav btn-nav-reg">Регистрация</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="cart-page">
+  <div class="page-header" style="margin-bottom:28px">
+    <div class="section-label">Магазин</div>
+    <h1 class="section-title">Корзина <span id="cart-count-title"></span></h1>
+  </div>
+
+  <div id="cart-empty-state" class="cart-empty hidden">
+    <div class="ei">🛒</div>
+    <h3>Корзина пуста</h3>
+    <p style="margin-bottom:24px">Добавьте товары из каталога</p>
+    <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
+  </div>
+
+  <div id="cart-main" class="hidden">
+    <div class="cart-grid">
+      <!-- Items -->
+      <div>
+        <div class="cart-items-box">
+          <div class="cart-items-head">
+            <h2>Товары</h2>
+            <button onclick="clearCart()" style="font-size:.8rem;color:var(--gray400);background:none;border:none;cursor:pointer">🗑 Очистить всё</button>
+          </div>
+          <div id="cart-items-list"></div>
+        </div>
+
+        <!-- Checkout form -->
+        <div class="checkout-form-box">
+          <div class="checkout-form-title">📋 Данные для оформления заказа</div>
+          <div class="form-row-2">
+            <div class="cf-group">
+              <label class="cf-label">Ваше имя *</label>
+              <input type="text" class="cf-input" id="cf-name" placeholder="Айбек Маматов">
+            </div>
+            <div class="cf-group">
+              <label class="cf-label">Телефон *</label>
+              <input type="tel" class="cf-input" id="cf-phone" placeholder="+996 700 000 000">
+            </div>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Адрес доставки *</label>
+            <input type="text" class="cf-input" id="cf-address" placeholder="г. Бишкек, ул. Московская, д. 123, кв. 45">
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Удобное время доставки</label>
+            <input type="text" class="cf-input" id="cf-time" placeholder="Например: с 12:00 до 18:00">
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Комментарий к заказу</label>
+            <textarea class="cf-textarea" id="cf-comment" placeholder="Дополнительные пожелания, ориентиры..."></textarea>
+          </div>
+          <button onclick="submitWhatsAppOrder()" class="wa-order-btn">
+            📲 Оформить заказ через WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="cart-summary">
+        <h3>Итого</h3>
+        <div class="sum-row"><span>Товаров:</span><span id="sum-qty">0</span></div>
+        <div class="sum-row"><span>Сумма:</span><span id="sum-sub">0 сом</span></div>
+        <div class="sum-row"><span>Доставка:</span><span id="sum-delivery-val">300 сом</span></div>
+        <div id="delivery-badge" class="sum-delivery-badge paid">
+          <span>🚚</span><span id="delivery-badge-text">До бесплатной доставки: 5000 сом</span>
+        </div>
+        <div class="delivery-progress"><div class="delivery-progress-bar" id="delivery-bar" style="width:0%"></div></div>
+        <p class="delivery-hint">Бесплатная доставка от 5 000 сом</p>
+        <div class="sum-row total"><span>К оплате:</span><strong id="sum-total">0 сом</strong></div>
+        <div id="user-discount-note" style="display:none;background:#dcfce7;color:#166534;padding:10px 12px;border-radius:10px;font-size:.8rem;font-weight:600;margin-top:12px;text-align:center">
+          ✅ Скидка 50% применена автоматически
+        </div>
+        <a href="catalog.html" class="btn btn-outline" style="width:100%;margin-top:14px;text-align:center">⬅ Продолжить покупки</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-icon">🌿</div><span style="color:white">Green Leaf Global Shop</span></div>
+      <p>Натуральные эко-товары для здоровья и заботы о планете. Бишкек.</p>
+    </div>
+    <div class="footer-col"><h4>Разделы</h4><ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="delivery.html">Доставка</a></li>
+      <li><a href="privacy.html">Политика конф.</a></li>
+      <li><a href="terms.html">Условия</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Контакты</h4><ul>
+      <li><a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank">📷 Instagram</a></li>
+      <li><a href="https://wa.me/996700713905" target="_blank">💬 WhatsApp</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Green Leaf Global Shop. Все права защищены.</span></div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalog.js"></script>
+<script>
+const CART_KEY = 'glg_cart';
+const FREE_DELIVERY_THRESHOLD = 5000;
+const DELIVERY_COST = 300;
+
+function getCart() { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+function saveCart(cart) { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+function clearCart() {
+  if (confirm('Очистить корзину?')) { saveCart([]); renderCart(); }
+}
+
+function changeQty(productId, delta) {
+  const cart = getCart();
+  const item = cart.find(x => x.id === productId);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart.splice(cart.indexOf(item), 1);
+  saveCart(cart);
+  renderCart();
+}
+
+function removeItem(productId) {
+  saveCart(getCart().filter(x => x.id !== productId));
+  renderCart();
+}
+
+let _currentSubTotal = 0;
+let _isFreeDelivery = false;
+
+function renderCart() {
+  const cart = getCart();
+  const emptyState = document.getElementById('cart-empty-state');
+  const mainGrid = document.getElementById('cart-main');
+
+  if (cart.length === 0) {
+    emptyState.classList.remove('hidden');
+    mainGrid.classList.add('hidden');
+    return;
+  }
+  emptyState.classList.add('hidden');
+  mainGrid.classList.remove('hidden');
+
+  const list = document.getElementById('cart-items-list');
+  const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  const discount = user ? 0.5 : 1;
+
+  if (user) document.getElementById('user-discount-note').style.display = 'block';
+
+  list.innerHTML = cart.map(item => {
+    const product = PRODUCTS.find(p => p.id === item.id);
+    if (!product) return '';
+    const unitPrice = Math.round(product.price * discount);
+    const imgSrc = BASE_IMG + product.img;
+    return `
+    <div class="cart-item">
+      <div class="cart-item-img">
+        <img src="${imgSrc}" alt="${product.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="fallback" style="display:none">${product.emoji}</div>
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${product.name}</div>
+        <div class="cart-item-cat">${product.catName}</div>
+        ${user ? `<div style="font-size:.72rem;color:#16a34a;font-weight:600;margin-top:2px">✅ −50% скидка</div>` : ''}
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="cart-item-qty">
+          <button class="cart-qty-btn" onclick="changeQty(${product.id},-1)">−</button>
+          <span class="cart-qty-val">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="changeQty(${product.id},1)">+</button>
+        </div>
+        <div class="cart-item-price">${formatPrice(unitPrice * item.qty)}</div>
+        <button class="cart-remove" onclick="removeItem(${product.id})" title="Удалить">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  let subTotal = 0;
+  cart.forEach(item => {
+    const product = PRODUCTS.find(p => p.id === item.id);
+    if (!product) return;
+    subTotal += Math.round(product.price * discount) * item.qty;
+  });
+  _currentSubTotal = subTotal;
+
+  const totalQty = cart.reduce((s,x) => s+x.qty, 0);
+  const isFree = subTotal >= FREE_DELIVERY_THRESHOLD;
+  _isFreeDelivery = isFree;
+  const total = subTotal + (isFree ? 0 : DELIVERY_COST);
+
+  document.getElementById('sum-qty').textContent = totalQty;
+  document.getElementById('sum-sub').textContent = formatPrice(subTotal);
+  document.getElementById('sum-delivery-val').textContent = isFree ? 'Бесплатно 🎉' : formatPrice(DELIVERY_COST);
+  document.getElementById('sum-total').textContent = formatPrice(total);
+  document.getElementById('cart-count-title').textContent = `(${totalQty})`;
+
+  const badge = document.getElementById('delivery-badge');
+  const bar = document.getElementById('delivery-bar');
+  bar.style.width = Math.min(100, (subTotal/FREE_DELIVERY_THRESHOLD)*100) + '%';
+  if (isFree) {
+    badge.className = 'sum-delivery-badge free';
+    document.getElementById('delivery-badge-text').textContent = '🎉 Бесплатная доставка!';
+  } else {
+    badge.className = 'sum-delivery-badge paid';
+    document.getElementById('delivery-badge-text').textContent = `До бесплатной: ${formatPrice(FREE_DELIVERY_THRESHOLD - subTotal)}`;
+  }
+}
+
+function submitWhatsAppOrder() {
+  const name = document.getElementById('cf-name').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const address = document.getElementById('cf-address').value.trim();
+  const time = document.getElementById('cf-time').value.trim();
+  const comment = document.getElementById('cf-comment').value.trim();
+
+  if (!name || !phone || !address) {
+    showNotif('Заполните имя, телефон и адрес доставки', 'warning');
+    return;
+  }
+
+  const cart = getCart();
+  const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  const discount = user ? 0.5 : 1;
+
+  const lines = [
+    `*Заказ Greenleaf* 🌿`,
+    `Имя: ${name}`,
+    `Телефон: ${phone}`,
+    `Адрес: ${address}`,
+    time ? `Время: ${time}` : '',
+    comment ? `Комментарий: ${comment}` : '',
+    '',
+    '*Товары:*'
+  ];
+
+  let subTotal = 0;
+  cart.forEach(item => {
+    const product = PRODUCTS.find(p => p.id === item.id);
+    if (!product) return;
+    const unitPrice = Math.round(product.price * discount);
+    subTotal += unitPrice * item.qty;
+    lines.push(`• ${product.name} x${item.qty} = ${formatPrice(unitPrice * item.qty)}`);
+  });
+  lines.push('');
+  const isFree = subTotal >= FREE_DELIVERY_THRESHOLD;
+  lines.push(`Сумма: ${formatPrice(subTotal)}`);
+  lines.push(`Доставка: ${isFree ? 'Бесплатно 🎉' : formatPrice(DELIVERY_COST)}`);
+  lines.push(`*Итого: ${formatPrice(subTotal + (isFree ? 0 : DELIVERY_COST))}*`);
+  if (user) lines.push(`(Партнёрская скидка 50% применена)`);
+
+  const waText = lines.filter(Boolean).join('\n');
+  window.open(`https://wa.me/996700713905?text=${encodeURIComponent(waText)}`, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCart();
+});
+</script>
+</body>
+</html>

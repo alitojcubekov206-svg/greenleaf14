@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Профиль — Green Leaf Global Shop</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.profile-page{padding-bottom:80px}
+.profile-hero{background:linear-gradient(135deg,var(--g700),var(--g900));padding:44px clamp(16px,5vw,80px);color:white;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.profile-avatar-lg{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:800;border:3px solid rgba(255,255,255,.4);flex-shrink:0}
+.profile-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700}
+.profile-email{font-size:.85rem;opacity:.75;margin-top:3px}
+.profile-badge-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.pbadge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(255,255,255,.15);border-radius:var(--rfull);font-size:.76rem;font-weight:600}
+.profile-content{padding:36px clamp(16px,5vw,80px) 0;display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:start}
+
+/* Sidebar */
+.profile-nav{background:white;border-radius:20px;box-shadow:var(--shmd);overflow:hidden;position:sticky;top:90px}
+.profile-nav-item{display:flex;align-items:center;gap:10px;padding:14px 18px;font-weight:500;font-size:.9rem;cursor:pointer;border-bottom:1px solid var(--gray100);transition:all .18s;color:var(--gray700)}
+.profile-nav-item:last-child{border:none}
+.profile-nav-item:hover,.profile-nav-item.active{background:var(--g50);color:var(--g700)}
+.profile-nav-item .ni{font-size:1.1rem}
+
+/* Sections */
+.profile-section{display:none}
+.profile-section.active{display:block}
+.profile-section-box{background:white;border-radius:20px;box-shadow:var(--shmd);padding:24px;margin-bottom:20px}
+.section-box-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:18px;border-bottom:1px solid var(--gray100);padding-bottom:12px}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--gray100);font-size:.9rem}
+.info-row:last-child{border:none}
+.info-label{color:var(--gray600);font-size:.84rem}
+.info-val{font-weight:600}
+
+/* Stats */
+.profile-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:22px}
+.profile-stat-card{background:white;border-radius:16px;box-shadow:var(--shsm);padding:18px;text-align:center;border:1px solid var(--gray100)}
+.profile-stat-num{font-size:2rem;font-weight:800;color:var(--g700)}
+.profile-stat-lbl{font-size:.76rem;color:var(--gray400);margin-top:2px}
+
+/* Discount section */
+.discount-card{background:linear-gradient(135deg,#dcfce7,#f0fdf4);border:2px solid #86efac;border-radius:20px;padding:24px;text-align:center;margin-bottom:20px}
+.discount-big{font-size:3rem;font-weight:800;color:var(--g700);line-height:1}
+.discount-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin:8px 0 4px}
+
+/* Wishlist */
+.wl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-top:4px}
+.wl-empty{text-align:center;padding:48px 20px;color:var(--gray400)}
+.wl-empty .ei{font-size:3rem;margin-bottom:12px}
+
+.logout-btn{display:flex;align-items:center;gap:8px;width:100%;padding:13px 18px;background:none;border:none;cursor:pointer;color:#ef4444;font-weight:600;font-size:.9rem;font-family:inherit;transition:.18s}
+.logout-btn:hover{background:#fef2f2}
+
+@media(max-width:900px){.profile-content{grid-template-columns:1fr}}
+@media(max-width:600px){.profile-hero{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">🌿</div><span>Green Leaf</span></a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="cart.html">🛒 Корзина</a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="nav-actions">
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="nav-ig-btn">📷</a>
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-login">Войти</a>
+      <a href="login.html" class="btn-nav btn-nav-reg">Регистрация</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="profile-page" id="profile-page-wrap">
+  <!-- Hero will be inserted by JS -->
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-icon">🌿</div><span style="color:white">Green Leaf</span></div>
+      <p>Натуральные эко-товары для здоровья и заботы о планете.</p>
+    </div>
+    <div class="footer-col"><h4>Магазин</h4><ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="delivery.html">Доставка</a></li>
+      <li><a href="privacy.html">Конф-ть</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Green Leaf Global Shop</span></div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalog.js"></script>
+<script>
+const CART_KEY = 'glg_cart';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const user = getCurrentUser();
+  if (!user) { window.location.href = 'login.html'; return; }
+
+  const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+  const totalOrders = parseInt(localStorage.getItem('glg_orders_' + user.id) || '0');
+  const wishlist = getWishlist();
+  const totalSpent = parseInt(localStorage.getItem('glg_spent_' + user.id) || '0');
+
+  const initials = (user.name || user.email)[0].toUpperCase();
+  const memberDate = new Date(user.id ? parseInt(user.id) : Date.now());
+  const joinedText = memberDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long' });
+
+  document.getElementById('profile-page-wrap').innerHTML = `
+    <div class="profile-hero">
+      <div class="profile-avatar-lg">${initials}</div>
+      <div>
+        <div class="profile-name">${user.name || 'Пользователь'}</div>
+        <div class="profile-email">${user.email}</div>
+        <div class="profile-badge-row">
+          <span class="pbadge">🌿 Эко-участник</span>
+          <span class="pbadge">✅ 50% скидка</span>
+          <span class="pbadge">📅 С ${joinedText}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-content">
+      <div>
+        <div class="profile-nav">
+          <div class="profile-nav-item active" data-sec="overview">
+            <span class="ni">📊</span> Обзор
+          </div>
+          <div class="profile-nav-item" data-sec="discount">
+            <span class="ni">🎁</span> Скидка
+          </div>
+          <div class="profile-nav-item" data-sec="wishlist">
+            <span class="ni">❤️</span> Избранное (${wishlist.length})
+          </div>
+          <div class="profile-nav-item" data-sec="info">
+            <span class="ni">👤</span> Данные аккаунта
+          </div>
+          <button class="logout-btn" onclick="logout()">
+            <span>🚪</span> Выйти из аккаунта
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <!-- Overview -->
+        <div class="profile-section active" id="sec-overview">
+          <div class="profile-stats">
+            <div class="profile-stat-card">
+              <div class="profile-stat-num">${cart.reduce((s,x)=>s+x.qty,0)}</div>
+              <div class="profile-stat-lbl">Товаров в корзине</div>
+            </div>
+            <div class="profile-stat-card">
+              <div class="profile-stat-num">${wishlist.length}</div>
+              <div class="profile-stat-lbl">В избранном</div>
+            </div>
+            <div class="profile-stat-card">
+              <div class="profile-stat-num">50%</div>
+              <div class="profile-stat-lbl">Ваша скидка</div>
+            </div>
+          </div>
+          <div class="profile-section-box">
+            <div class="section-box-title">Быстрые действия</div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="catalog.html" class="btn btn-primary">🛍️ В каталог</a>
+              <a href="cart.html" class="btn btn-outline">🛒 Корзина</a>
+              <a href="https://wa.me/996700713905" target="_blank" class="btn btn-ghost">📲 Позвонить в WhatsApp</a>
+            </div>
+          </div>
+          <div class="profile-section-box">
+            <div class="section-box-title">Информация о доставке</div>
+            <div class="info-row"><span class="info-label">Бесплатная доставка</span><span class="info-val">от 5 000 сом</span></div>
+            <div class="info-row"><span class="info-label">Платная доставка</span><span class="info-val">300 сом</span></div>
+            <div class="info-row"><span class="info-label">Зона доставки</span><span class="info-val">Бишкек, Кыргызстан</span></div>
+            <div class="info-row"><span class="info-label">Время</span><span class="info-val">9:00 - 20:00, пн-вс</span></div>
+          </div>
+        </div>
+
+        <!-- Discount -->
+        <div class="profile-section" id="sec-discount">
+          <div class="discount-card">
+            <div class="discount-big">−50%</div>
+            <div class="discount-title">Ваша персональная скидка</div>
+            <p style="color:var(--g700);font-size:.9rem;margin-top:6px">Скидка автоматически применяется ко всем товарам</p>
+          </div>
+          <div class="profile-section-box">
+            <div class="section-box-title">Как работает скидка</div>
+            <div class="info-row"><span class="info-label">Активация</span><span class="info-val">Автоматически для всех</span></div>
+            <div class="info-row"><span class="info-label">Размер скидки</span><span class="info-val">50% на все товары</span></div>
+            <div class="info-row"><span class="info-label">Ограничения</span><span class="info-val">Нет</span></div>
+            <div class="info-row"><span class="info-label">Срок</span><span class="info-val">Бессрочно</span></div>
+          </div>
+          <a href="catalog.html" class="btn btn-primary btn-lg">🛍️ Покупать со скидкой</a>
+        </div>
+
+        <!-- Wishlist -->
+        <div class="profile-section" id="sec-wishlist">
+          <div id="wl-container">
+            ${wishlist.length === 0
+              ? `<div class="profile-section-box"><div class="wl-empty"><div class="ei">🤍</div><p>Избранных товаров нет</p><a href="catalog.html" class="btn btn-outline" style="margin-top:14px">Перейти в каталог</a></div></div>`
+              : `<div class="profile-section-box"><div class="section-box-title">Избранные товары (${wishlist.length})</div>
+                 <div class="wl-grid">${wishlist.map(id => {
+                   const p = PRODUCTS.find(x => x.id === id);
+                   if (!p) return '';
+                   const price = Math.round(p.price * 0.5);
+                   return `<div class="product-card" onclick="window.location.href='product.html?id=${p.id}'" style="cursor:pointer">
+                     <div class="card-img-wrap"><div class="product-img-bg bg-${p.cat}">${p.emoji}</div></div>
+                     <div class="card-body">
+                       <div class="card-name">${p.name}</div>
+                       <div class="card-footer"><span class="card-price">${formatPrice(price)}</span></div>
+                     </div>
+                   </div>`;
+                 }).join('')}</div></div>`
+            }
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="profile-section" id="sec-info">
+          <div class="profile-section-box">
+            <div class="section-box-title">Данные аккаунта</div>
+            <div class="info-row"><span class="info-label">Имя</span><span class="info-val">${user.name || '—'}</span></div>
+            <div class="info-row"><span class="info-label">Email</span><span class="info-val">${user.email}</span></div>
+            <div class="info-row"><span class="info-label">Аккаунт создан</span><span class="info-val">${joinedText}</span></div>
+            <div class="info-row"><span class="info-label">Тип аккаунта</span><span class="info-val">🌿 Стандартный с 50% скидкой</span></div>
+          </div>
+          <div class="profile-section-box">
+            <div class="section-box-title">Безопасность</div>
+            <div style="color:var(--gray400);font-size:.9rem;padding:8px 0">
+              Для изменения пароля или данных свяжитесь с нами через WhatsApp.
+            </div>
+            <a href="https://wa.me/996700713905" target="_blank" class="btn btn-outline" style="margin-top:12px">📲 Написать в WhatsApp</a>
+          </div>
+          <button class="logout-btn" style="background:#fff5f5;border-radius:12px;padding:14px 20px;width:auto" onclick="logout()">
+            🚪 Выйти из аккаунта
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Nav switching
+  document.querySelectorAll('.profile-nav-item[data-sec]').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.profile-nav-item').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.profile-section').forEach(x => x.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('sec-' + item.dataset.sec)?.classList.add('active');
+    });
+  });
+});
+</script>
+</body>
+</html>

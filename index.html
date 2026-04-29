@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Leaf Global Shop — Эко-магазин в Бишкеке</title>
+<meta name="description" content="Green Leaf — премиальный эко-магазин в Бишкеке. Натуральная косметика, здоровье, бытовая химия. Цены в сомах.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">🌿</div>
+    <span>Green Leaf</span>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="active">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="index.html#about">О нас</a>
+    <a href="cart.html">🛒 Корзина</a>
+  </div>
+  <div class="nav-spacer" style="flex:1"></div>
+  <div class="nav-search">
+    <span class="si">🔍</span>
+    <input id="nav-search-input" type="text" placeholder="Поиск товаров...">
+  </div>
+  <div class="nav-actions">
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="nav-ig-btn" title="Instagram @greenleaf_bishkek14">📷</a>
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-login">Войти</a>
+      <a href="login.html#register" class="btn-nav btn-nav-reg">Регистрация</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+    <a href="cart.html" style="font-size:1.3rem;text-decoration:none" title="Корзина">🛒</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌱 100% натуральные продукты</div>
+    <h1>Живи <em>экологично</em>,<br>живи здорово</h1>
+    <p>Green Leaf — ваш маркет натуральных товаров в Бишкеке. Косметика, здоровье и эко-продукты с заботой о планете.</p>
+    <div class="hero-actions">
+      <a href="catalog.html" class="btn btn-primary btn-lg">Перейти в каталог 🛍️</a>
+      <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="btn btn-ig btn-lg">📷 Instagram</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">30+</div>
+        <div class="hero-stat-label">Товаров</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Категории</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Натуральное</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-deco">
+    <div class="hero-deco-card">🌿</div>
+    <div class="hero-float f1">
+      <span class="float-em">🛡️</span>
+      <div><div style="font-size:.7rem;color:#9ca3af">Без химии</div><div>Натуральный состав</div></div>
+    </div>
+    <div class="hero-float f2">
+      <span class="float-em">✅</span>
+      <div><div style="font-size:.7rem;color:#9ca3af">Цены</div><div>В сомах (KGS)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="advantages">
+  <div class="section-header text-center">
+    <div class="section-label">Почему мы</div>
+    <h2 class="section-title">Наши <span>преимущества</span></h2>
+  </div>
+  <div class="advantages-grid">
+    <div class="adv-card">
+      <div class="adv-icon">🌱</div>
+      <div class="adv-title">Только натуральное</div>
+      <div class="adv-desc">Все товары проходят проверку на натуральность состава</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🌍</div>
+      <div class="adv-title">Эко-упаковка</div>
+      <div class="adv-desc">Упаковываем в биоразлагаемые и переработанные материалы</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">💰</div>
+      <div class="adv-title">Цены в сомах</div>
+      <div class="adv-desc">Честные цены без скрытых платежей, только KGS</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🚚</div>
+      <div class="adv-title">Быстрая доставка</div>
+      <div class="adv-desc">Доставка по Бишкеку в день заказа при заказе до 14:00</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">💬</div>
+      <div class="adv-title">Поддержка 24/7</div>
+      <div class="adv-desc">Ответим в Instagram и на сайте в любое время</div>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR PRODUCTS -->
+<section class="popular-section">
+  <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <div>
+      <div class="section-label">Каталог</div>
+      <h2 class="section-title">Популярные <span>товары</span></h2>
+    </div>
+    <a href="catalog.html" class="btn btn-outline btn-sm">Все товары →</a>
+  </div>
+  <div class="products-grid" id="products-grid"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section style="padding:0 clamp(16px,5vw,80px) 72px">
+  <div class="section-header text-center">
+    <div class="section-label">Категории</div>
+    <h2 class="section-title">Выберите <span>категорию</span></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+    <a href="catalog.html?cat=chemistry" style="display:block;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#d1fae5,#a7f3d0);padding:28px;text-align:center;transition:transform .28s,box-shadow .28s;box-shadow:0 4px 16px rgba(0,0,0,.08);text-decoration:none" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,.08)'">
+      <div style="font-size:3rem;margin-bottom:12px">🧴</div>
+      <div style="font-weight:700;color:#166534;font-size:1rem">Бытовая химия</div>
+      <div style="font-size:.8rem;color:#4b5563;margin-top:4px">8 товаров</div>
+    </a>
+    <a href="catalog.html?cat=cosmetics" style="display:block;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#fce7f3,#fbcfe8);padding:28px;text-align:center;transition:transform .28s,box-shadow .28s;box-shadow:0 4px 16px rgba(0,0,0,.08);text-decoration:none" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,.08)'">
+      <div style="font-size:3rem;margin-bottom:12px">💄</div>
+      <div style="font-weight:700;color:#9d174d;font-size:1rem">Косметика</div>
+      <div style="font-size:.8rem;color:#4b5563;margin-top:4px">8 товаров</div>
+    </a>
+    <a href="catalog.html?cat=health" style="display:block;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#dbeafe,#bfdbfe);padding:28px;text-align:center;transition:transform .28s,box-shadow .28s;box-shadow:0 4px 16px rgba(0,0,0,.08);text-decoration:none" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,.08)'">
+      <div style="font-size:3rem;margin-bottom:12px">💊</div>
+      <div style="font-weight:700;color:#1e3a8a;font-size:1rem">Здоровье</div>
+      <div style="font-size:.8rem;color:#4b5563;margin-top:4px">8 товаров</div>
+    </a>
+    <a href="catalog.html?cat=eco" style="display:block;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#ecfccb,#d9f99d);padding:28px;text-align:center;transition:transform .28s,box-shadow .28s;box-shadow:0 4px 16px rgba(0,0,0,.08);text-decoration:none" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,.08)'">
+      <div style="font-size:3rem;margin-bottom:12px">♻️</div>
+      <div style="font-weight:700;color:#365314;font-size:1rem">Эко товары</div>
+      <div style="font-size:.8rem;color:#4b5563;margin-top:4px">6 товаров</div>
+    </a>
+  </div>
+</section>
+
+<!-- INSTAGRAM SECTION -->
+<section class="ig-section" id="about">
+  <div class="ig-inner">
+    <span class="ig-icon-big">📷</span>
+    <h2 class="ig-title">Следите за нами</h2>
+    <p class="ig-sub">Новинки, акции и вдохновляющий эко-контент каждый день</p>
+    <div class="ig-handle">@greenleaf_bishkek14</div>
+    <br>
+    <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="btn btn-ig-main btn-lg">
+      📷 Перейти в Instagram
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="logo-icon">🌿</div>
+        <span style="color:white">Green Leaf Global Shop</span>
+      </div>
+      <p>Натуральные эко-товары для здоровья и заботы о планете. Бишкек, Кыргызстан.</p>
+      <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="footer-ig">
+        <span class="footer-ig-icon">📷</span>
+        <span>Наш Instagram: @greenleaf_bishkek14</span>
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Каталог</h4>
+      <ul>
+        <li><a href="catalog.html?cat=chemistry">Бытовая химия</a></li>
+        <li><a href="catalog.html?cat=cosmetics">Косметика</a></li>
+        <li><a href="catalog.html?cat=health">Здоровье</a></li>
+        <li><a href="catalog.html?cat=eco">Эко товары</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Магазин</h4>
+      <ul>
+        <li><a href="index.html#about">О нас</a></li>
+        <li><a href="catalog.html">Все товары</a></li>
+        <li><a href="delivery.html">Доставка</a></li>
+        <li><a href="cart.html">Корзина</a></li>
+        <li><a href="login.html">Войти</a></li>
+        <li><a href="profile.html">Кабинет</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Правила</h4>
+      <ul>
+        <li><a href="privacy.html">Конфиденциальность</a></li>
+        <li><a href="terms.html">Условия исп.</a></li>
+        <li><a href="admin.html">⚙️ Панель управления</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Green Leaf Global Shop. Все права защищены.</span>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/greenleaf_bishkek14" target="_blank" class="footer-soc" title="Instagram">📷</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ANTI-GRAVITY BTN -->
+<button class="ag-btn" id="ag-btn">🌌 Anti-Gravity</button>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/gravity.js"></script>
+<script>
+// Home page: show only 8 popular (hit) products
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('products-grid');
+  const popular = PRODUCTS.filter(p => p.tag === 'hit' || p.tag === 'top' || p.tag === 'premium').slice(0, 8);
+  grid.innerHTML = popular.map(buildCardHtml).join('');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Админ панель — Green Leaf Global Shop</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.admin-page{padding:32px clamp(16px,4vw,60px) 80px;max-width:1200px;margin:0 auto}
+.admin-hero{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:20px;padding:28px;color:white;display:flex;align-items:center;gap:18px;margin-bottom:28px;flex-wrap:wrap}
+.admin-hero h1{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700}
+.admin-hero p{font-size:.85rem;opacity:.75;margin-top:3px}
+.admin-lock-icon{width:56px;height:56px;background:rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0}
+.admin-grid{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start}
+.admin-nav{background:white;border-radius:18px;box-shadow:var(--shmd);overflow:hidden;position:sticky;top:90px}
+.admin-nav-item{display:flex;align-items:center;gap:10px;padding:13px 18px;font-weight:500;font-size:.88rem;cursor:pointer;border-bottom:1px solid var(--gray100);transition:.18s;color:var(--gray700)}
+.admin-nav-item:last-child{border:none}
+.admin-nav-item:hover,.admin-nav-item.active{background:#ede9fe;color:#4c1d95}
+.admin-section{display:none}.admin-section.active{display:block}
+
+/* Stats */
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:white;border-radius:16px;box-shadow:var(--shmd);padding:20px;border-left:4px solid var(--g500)}
+.stat-num{font-size:2rem;font-weight:800;color:var(--g700)}
+.stat-lbl{font-size:.78rem;color:var(--gray400);margin-top:2px}
+
+/* Form */
+.admin-box{background:white;border-radius:18px;box-shadow:var(--shmd);padding:24px;margin-bottom:20px}
+.admin-box-title{font-weight:700;font-size:1rem;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--gray100);display:flex;justify-content:space-between;align-items:center}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{margin-bottom:14px}
+.form-label{font-size:.82rem;font-weight:600;color:var(--gray700);margin-bottom:5px;display:block}
+.form-input,.form-select,.form-textarea{width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--gray200);font-family:inherit;font-size:.88rem;outline:none;background:var(--gray100);transition:.2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--g400);background:white;box-shadow:0 0 0 3px rgba(34,197,94,.08)}
+.form-textarea{min-height:90px;resize:vertical}
+.tag-sel{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+.tag-opt{padding:5px 12px;border-radius:var(--rfull);border:1.5px solid var(--gray200);font-size:.78rem;cursor:pointer;transition:.18s}
+.tag-opt.selected{background:var(--g500);color:white;border-color:var(--g500)}
+
+/* Product table */
+.product-table{width:100%;border-collapse:collapse}
+.product-table th{text-align:left;padding:10px 14px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray400);border-bottom:2px solid var(--gray100)}
+.product-table td{padding:12px 14px;border-bottom:1px solid var(--gray100);font-size:.87rem;vertical-align:middle}
+.product-table tr:hover td{background:#fafff9}
+.p-emoji{font-size:1.8rem}
+.p-actions{display:flex;gap:8px}
+.p-edit-btn,.p-del-btn{padding:5px 12px;border-radius:var(--rfull);font-size:.76rem;font-weight:600;border:none;cursor:pointer;transition:.18s}
+.p-edit-btn{background:var(--g50);color:var(--g700)}.p-edit-btn:hover{background:var(--g500);color:white}
+.p-del-btn{background:#fef2f2;color:#dc2626}.p-del-btn:hover{background:#dc2626;color:white}
+
+/* Users */
+.user-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray100)}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--g400),var(--g600));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;flex-shrink:0}
+.user-info{flex:1}
+.user-name{font-weight:600;font-size:.9rem}
+.user-email{font-size:.78rem;color:var(--gray400)}
+.user-badge{padding:3px 9px;border-radius:var(--rfull);font-size:.72rem;font-weight:700;background:var(--g100);color:var(--g700)}
+
+.save-btn{background:linear-gradient(135deg,var(--g500),var(--g700));color:white;padding:11px 26px;border-radius:var(--rfull);font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:.25s}
+.save-btn:hover{transform:translateY(-2px);box-shadow:var(--shg)}
+
+@media(max-width:900px){.admin-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">🌿</div><span>Green Leaf</span></a>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="admin.html" class="active" style="color:#6366f1">⚙️ Админ</a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="nav-actions">
+    <div id="nav-guest">
+      <a href="login.html" class="btn-nav btn-nav-login">Войти</a>
+    </div>
+    <div id="nav-user-area" class="hidden">
+      <a href="profile.html" class="nav-user">
+        <div class="nav-avatar" id="nav-avatar-char">U</div>
+        <span id="nav-username">Пользователь</span>
+      </a>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Auth gate -->
+<div id="admin-gate" style="min-height:60vh;display:flex;align-items:center;justify-content:center;padding:40px 20px">
+  <div style="background:white;border-radius:20px;box-shadow:var(--shxl);padding:36px;max-width:380px;width:100%;text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:12px">🔐</div>
+    <h2 style="font-family:'Playfair Display',serif;margin-bottom:8px">Доступ к панели</h2>
+    <p style="color:var(--gray400);font-size:.88rem;margin-bottom:20px">Введите пароль администратора</p>
+    <div style="position:relative;margin-bottom:14px">
+      <input id="admin-pw-input" type="password" class="form-input" placeholder="Пароль администратора" style="padding-right:42px">
+      <button onclick="togglePw()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem">👁️</button>
+    </div>
+    <div id="admin-pw-err" style="color:#dc2626;font-size:.8rem;margin-bottom:10px;display:none">Неверный пароль</div>
+    <button class="save-btn" onclick="checkAdminPw()" style="width:100%">Войти в панель</button>
+    <p style="font-size:.76rem;color:var(--gray400);margin-top:14px">Пароль: <code>greenleaf2026</code></p>
+  </div>
+</div>
+
+<div id="admin-content" style="display:none">
+<div class="admin-page">
+  <div class="admin-hero">
+    <div class="admin-lock-icon">⚙️</div>
+    <div>
+      <h1>Панель администратора</h1>
+      <p>Green Leaf Global Shop — управление товарами и пользователями</p>
+    </div>
+  </div>
+
+  <div class="admin-grid">
+    <!-- Sidebar nav -->
+    <div>
+      <div class="admin-nav">
+        <div class="admin-nav-item active" data-sec="dashboard">📊 Обзор</div>
+        <div class="admin-nav-item" data-sec="add-product">➕ Добавить товар</div>
+        <div class="admin-nav-item" data-sec="products">🛍️ Все товары</div>
+        <div class="admin-nav-item" data-sec="users">👥 Пользователи</div>
+        <div class="admin-nav-item" data-sec="settings">⚙️ Настройки</div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Dashboard -->
+      <div class="admin-section active" id="sec-dashboard">
+        <div class="admin-stats" id="admin-stats-row"></div>
+        <div class="admin-box">
+          <div class="admin-box-title">Последние действия</div>
+          <div id="recent-log"></div>
+        </div>
+        <div class="admin-box" style="text-align:center;padding:28px">
+          <p style="color:var(--gray400);margin-bottom:16px">Быстрые ссылки</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+            <a href="catalog.html" target="_blank" class="btn btn-outline btn-sm">🛍️ Открыть каталог</a>
+            <a href="index.html" target="_blank" class="btn btn-ghost btn-sm">🌿 Главная страница</a>
+            <a href="https://wa.me/996700713905" target="_blank" class="btn btn-sm" style="background:#25D366;color:white">📲 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add product -->
+      <div class="admin-section" id="sec-add-product">
+        <div class="admin-box">
+          <div class="admin-box-title">Добавить новый товар</div>
+          <form id="add-product-form" onsubmit="addProduct(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Название товара *</label>
+                <input type="text" class="form-input" id="p-name" placeholder="EcoWash Pro" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Цена (сом) *</label>
+                <input type="number" class="form-input" id="p-price" placeholder="850" min="1" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Описание *</label>
+              <textarea class="form-textarea" id="p-desc" placeholder="Краткое описание товара..." required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Категория *</label>
+                <select class="form-select" id="p-cat" required>
+                  <option value="">Выберите категорию</option>
+                  <option value="chemistry">🧴 Бытовая химия</option>
+                  <option value="cosmetics">💄 Косметика</option>
+                  <option value="health">💊 Здоровье</option>
+                  <option value="eco">♻️ Эко товары</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Эмодзи / Иконка</label>
+                <input type="text" class="form-input" id="p-emoji" placeholder="🌿" maxlength="4">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Метка</label>
+              <div class="tag-sel" id="tag-sel">
+                <div class="tag-opt" data-tag="">Без метки</div>
+                <div class="tag-opt" data-tag="hit">Хит</div>
+                <div class="tag-opt" data-tag="new">Новинка</div>
+                <div class="tag-opt" data-tag="top">Топ</div>
+                <div class="tag-opt" data-tag="premium">Premium</div>
+                <div class="tag-opt" data-tag="eco">Эко</div>
+                <div class="tag-opt" data-tag="rec">Рекомендуем</div>
+              </div>
+              <input type="hidden" id="p-tag" value="">
+            </div>
+            <button type="submit" class="save-btn">➕ Добавить товар в каталог</button>
+          </form>
+        </div>
+
+        <!-- Added products preview -->
+        <div class="admin-box" id="added-preview" style="display:none">
+          <div class="admin-box-title">Добавленные через панель товары</div>
+          <div id="added-list"></div>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="admin-section" id="sec-products">
+        <div class="admin-box">
+          <div class="admin-box-title">
+            <span>Все товары (<span id="prod-count-label">30</span>)</span>
+            <input type="text" class="form-input" placeholder="Поиск..." id="admin-search" style="max-width:200px;padding:7px 12px">
+          </div>
+          <div style="overflow-x:auto">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>Иконка</th>
+                  <th>Название</th>
+                  <th>Категория</th>
+                  <th>Цена</th>
+                  <th>Метка</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody id="admin-product-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users -->
+      <div class="admin-section" id="sec-users">
+        <div class="admin-box">
+          <div class="admin-box-title">Зарегистрированные пользователи</div>
+          <div id="users-list"></div>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="admin-section" id="sec-settings">
+        <div class="admin-box">
+          <div class="admin-box-title">Настройки магазина</div>
+          <div class="form-group">
+            <label class="form-label">Порог бесплатной доставки (сом)</label>
+            <input type="number" class="form-input" id="s-delivery-threshold" value="5000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Стоимость доставки (сом)</label>
+            <input type="number" class="form-input" id="s-delivery-cost" value="300">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Скидка для зарегистрированных (%)</label>
+            <input type="number" class="form-input" id="s-discount" value="50" min="0" max="90">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp номер</label>
+            <input type="text" class="form-input" id="s-wa" value="+996 700 713 905">
+          </div>
+          <button class="save-btn" onclick="saveSettings()">💾 Сохранить настройки</button>
+        </div>
+        <div class="admin-box" style="border-left:4px solid #ef4444">
+          <div class="admin-box-title" style="color:#dc2626">⚠️ Опасная зона</div>
+          <p style="font-size:.86rem;color:var(--gray600);margin-bottom:14px">Сброс всех пользовательских данных (sessionStorage и localStorage). Необратимая операция.</p>
+          <button onclick="clearAllData()" style="background:#fef2f2;color:#dc2626;border:1.5px solid #fecaca;border-radius:var(--rfull);padding:9px 20px;font-weight:600;cursor:pointer;font-family:inherit">🗑 Очистить все данные</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-icon">🌿</div><span style="color:white">Green Leaf Admin</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Green Leaf Global Shop — Панель администратора</span></div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalog.js"></script>
+<script>
+const ADMIN_PW = 'greenleaf2026';
+let customProducts = JSON.parse(localStorage.getItem('glg_custom_products') || '[]');
+let selectedTag = '';
+
+function togglePw() {
+  const inp = document.getElementById('admin-pw-input');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function checkAdminPw() {
+  const pw = document.getElementById('admin-pw-input').value;
+  if (pw === ADMIN_PW) {
+    document.getElementById('admin-gate').style.display = 'none';
+    document.getElementById('admin-content').style.display = 'block';
+    initAdmin();
+  } else {
+    document.getElementById('admin-pw-err').style.display = 'block';
+  }
+}
+
+document.getElementById('admin-pw-input')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkAdminPw();
+});
+
+function initAdmin() {
+  updateStats();
+  renderProductTable();
+  renderUsers();
+  initTagSel();
+  initAdminNav();
+}
+
+function initAdminNav() {
+  document.querySelectorAll('.admin-nav-item[data-sec]').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.admin-nav-item').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.admin-section').forEach(x => x.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('sec-' + item.dataset.sec)?.classList.add('active');
+    });
+  });
+}
+
+function updateStats() {
+  const allProducts = [...PRODUCTS, ...customProducts];
+  const users = JSON.parse(localStorage.getItem('glg_users') || '[]');
+  const cart = JSON.parse(localStorage.getItem('glg_cart') || '[]');
+  document.getElementById('admin-stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${allProducts.length}</div><div class="stat-lbl">Всего товаров</div></div>
+    <div class="stat-card"><div class="stat-num">${users.length}</div><div class="stat-lbl">Пользователей</div></div>
+    <div class="stat-card"><div class="stat-num">${cart.reduce((s,x)=>s+x.qty,0)}</div><div class="stat-lbl">Товаров в корзине</div></div>
+    <div class="stat-card"><div class="stat-num">${customProducts.length}</div><div class="stat-lbl">Добавлено через панель</div></div>
+  `;
+  document.getElementById('recent-log').innerHTML = users.length === 0
+    ? '<p style="color:var(--gray400);font-size:.88rem;text-align:center;padding:20px">Нет зарегистрированных пользователей</p>'
+    : users.slice(-5).reverse().map(u => `
+      <div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray100)">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--g700)">${(u.name||u.email)[0].toUpperCase()}</div>
+        <div><div style="font-size:.86rem;font-weight:600">${u.name || u.email}</div><div style="font-size:.76rem;color:var(--gray400)">Зарегистрировался </div></div>
+        <span class="user-badge" style="margin-left:auto">50% скидка</span>
+      </div>
+    `).join('');
+}
+
+function renderProductTable(filter = '') {
+  const allProducts = [...PRODUCTS, ...customProducts];
+  const filtered = filter ? allProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase())) : allProducts;
+  document.getElementById('prod-count-label').textContent = filtered.length;
+  const catNames = { chemistry:'Бытовая химия', cosmetics:'Косметика', health:'Здоровье', eco:'Эко товары' };
+  const tagLabels = { hit:'Хит', new:'Новинка', top:'Топ', premium:'Premium', eco:'Эко', rec:'Рекомендуем' };
+  document.getElementById('admin-product-tbody').innerHTML = filtered.map(p => `
+    <tr>
+      <td class="p-emoji">${p.emoji || '📦'}</td>
+      <td>${p.name}</td>
+      <td><span style="font-size:.78rem;background:var(--gray100);padding:3px 8px;border-radius:var(--rfull)">${catNames[p.cat] || p.cat}</span></td>
+      <td style="font-weight:700;color:var(--g700)">${formatPrice(p.price)}</td>
+      <td>${p.tag ? `<span class="card-tag tag-${p.tag}" style="position:relative;top:auto;left:auto;display:inline-block">${tagLabels[p.tag]||p.tag}</span>` : '—'}</td>
+      <td>
+        <div class="p-actions">
+          <button class="p-edit-btn" onclick="window.open('product.html?id=${p.id}','_blank')">👁 Смотреть</button>
+          ${p.isCustom ? `<button class="p-del-btn" onclick="deleteCustomProduct(${p.id})">🗑</button>` : ''}
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+document.getElementById('admin-search')?.addEventListener('input', e => renderProductTable(e.target.value));
+
+function renderUsers() {
+  const users = JSON.parse(localStorage.getItem('glg_users') || '[]');
+  const container = document.getElementById('users-list');
+  if (!users.length) {
+    container.innerHTML = '<p style="color:var(--gray400);text-align:center;padding:24px">Нет зарегистрированных пользователей</p>';
+    return;
+  }
+  container.innerHTML = users.map(u => `
+    <div class="user-row">
+      <div class="user-avatar">${(u.name||u.email)[0].toUpperCase()}</div>
+      <div class="user-info">
+        <div class="user-name">${u.name || '—'}</div>
+        <div class="user-email">${u.email}</div>
+      </div>
+      <span class="user-badge">50% скидка</span>
+    </div>
+  `).join('');
+}
+
+function initTagSel() {
+  document.querySelectorAll('.tag-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.tag-opt').forEach(x => x.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedTag = opt.dataset.tag;
+      document.getElementById('p-tag').value = selectedTag;
+    });
+  });
+  document.querySelector('.tag-opt')?.classList.add('selected');
+}
+
+function addProduct(e) {
+  e.preventDefault();
+  const catEl = document.getElementById('p-cat');
+  const catNames = { chemistry:'Бытовая химия', cosmetics:'Косметика', health:'Здоровье', eco:'Эко товары' };
+  const newProd = {
+    id: Date.now(),
+    name: document.getElementById('p-name').value.trim(),
+    desc: document.getElementById('p-desc').value.trim(),
+    price: parseInt(document.getElementById('p-price').value),
+    cat: catEl.value,
+    catName: catNames[catEl.value] || catEl.value,
+    emoji: document.getElementById('p-emoji').value || '📦',
+    tag: selectedTag,
+    isCustom: true
+  };
+  customProducts.push(newProd);
+  localStorage.setItem('glg_custom_products', JSON.stringify(customProducts));
+  showNotif(`Товар "${newProd.name}" добавлен! ✅`, 'success');
+  e.target.reset();
+  document.querySelectorAll('.tag-opt').forEach(x => x.classList.remove('selected'));
+  document.querySelector('.tag-opt')?.classList.add('selected');
+  selectedTag = '';
+  renderProductTable();
+  updateStats();
+  renderAddedList();
+}
+
+function renderAddedList() {
+  if (customProducts.length === 0) return;
+  document.getElementById('added-preview').style.display = '';
+  document.getElementById('added-list').innerHTML = customProducts.map(p => `
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--gray100)">
+      <span style="font-size:1.5rem">${p.emoji}</span>
+      <div style="flex:1"><div style="font-weight:600;font-size:.9rem">${p.name}</div><div style="font-size:.77rem;color:var(--gray400)">${p.catName} · ${formatPrice(p.price)}</div></div>
+      <button class="p-del-btn" onclick="deleteCustomProduct(${p.id})">🗑</button>
+    </div>
+  `).join('');
+}
+
+function deleteCustomProduct(id) {
+  if (!confirm('Удалить товар?')) return;
+  customProducts = customProducts.filter(p => p.id !== id);
+  localStorage.setItem('glg_custom_products', JSON.stringify(customProducts));
+  showNotif('Товар удалён', 'info');
+  renderProductTable();
+  updateStats();
+  renderAddedList();
+}
+
+function saveSettings() {
+  const threshold = document.getElementById('s-delivery-threshold').value;
+  const cost = document.getElementById('s-delivery-cost').value;
+  const disc = document.getElementById('s-discount').value;
+  localStorage.setItem('glg_settings', JSON.stringify({ deliveryThreshold: parseInt(threshold), deliveryCost: parseInt(cost), discount: parseInt(disc) }));
+  showNotif('Настройки сохранены ✅', 'success');
+}
+
+function clearAllData() {
+  if (confirm('Очистить ВСЕ данные (пользователи, корзина, товары)? Это нельзя отменить!')) {
+    localStorage.clear();
+    showNotif('Данные очищены', 'warning');
+    setTimeout(() => location.reload(), 1500);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Load existing settings
+  const s = JSON.parse(localStorage.getItem('glg_settings') || '{}');
+  if (s.deliveryThreshold) document.getElementById('s-delivery-threshold').value = s.deliveryThreshold;
+  if (s.deliveryCost) document.getElementById('s-delivery-cost').value = s.deliveryCost;
+  if (s.discount) document.getElementById('s-discount').value = s.discount;
+});
+</script>
+</body>
+</html>
