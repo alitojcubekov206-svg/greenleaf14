@@ -447,6 +447,17 @@ function submitWhatsAppOrder() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderCart();
+  
+  // Auto-fill from user session
+  const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  if (user) {
+    if (user.name && user.name !== 'Google Пользователь') {
+      document.getElementById('cf-name').value = user.name;
+    }
+    if (user.phone) {
+      document.getElementById('cf-phone').value = user.phone;
+    }
+  }
 });
 </script>
 </body>

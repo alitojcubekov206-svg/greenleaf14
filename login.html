@@ -141,6 +141,13 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="form-label">Телефон</label>
+        <div class="input-wrap">
+          <span class="input-icon">📞</span>
+          <input id="reg-phone" type="tel" class="form-input" placeholder="+996 700 000 000">
+        </div>
+      </div>
+      <div class="form-group">
         <label class="form-label">Email</label>
         <div class="input-wrap">
           <span class="input-icon">📧</span>
@@ -262,6 +269,7 @@ function handleLogin() {
 /* ── Registration ── */
 function handleRegister() {
   const name = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
   const email = document.getElementById('reg-email').value.trim();
   const pass = document.getElementById('reg-pass').value;
   const errEl = document.getElementById('reg-err');
@@ -276,7 +284,13 @@ function handleRegister() {
   document.getElementById('reg-pass-err').classList.remove('show');
 
   const result = register(name, email, pass);
-  if (result.success) {
+  if (result.success || result.ok) {
+    // Save phone explicitly to session since register returns ok but internal state doesn't have phone
+    const cur = getCurrentUser();
+    if (cur) {
+      cur.phone = phone;
+      setCurrentUser(cur);
+    }
     showNotif('Аккаунт создан! Скидка 50% активирована 🌿', 'success');
     setTimeout(() => { window.location.href = 'catalog.html'; }, 900);
   } else {
