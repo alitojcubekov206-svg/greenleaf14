@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=1280">
 <title>Корзина — Green Leaf Global Shop</title>
 <meta name="description" content="Ваша корзина покупок Green Leaf. Эко-товары с доставкой по Бишкеку.">
 <link rel="stylesheet" href="css/style.css">
 <style>
 .cart-page{padding:44px clamp(16px,5vw,80px) 80px;max-width:1100px;margin:0 auto}
 .cart-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
-.cart-items-box,.cart-summary,.checkout-form-box{background:white;border-radius:20px;box-shadow:var(--shmd)}
-.cart-items-head{padding:20px 24px;border-bottom:1px solid var(--gray100);display:flex;justify-content:space-between;align-items:center}
+.cart-items-box,.cart-summary,.checkout-form-box{background:white;border-radius:22px;box-shadow:var(--shmd)}
+.cart-items-head{padding:20px 26px;border-bottom:1px solid var(--gray100);display:flex;justify-content:space-between;align-items:center}
 .cart-items-head h2{font-family:'Playfair Display',serif;font-size:1.3rem}
-.cart-item{display:flex;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid var(--gray100);transition:background .2s}
+.cart-item{display:flex;align-items:center;gap:16px;padding:18px 26px;border-bottom:1px solid var(--gray100);transition:background .2s}
 .cart-item:last-child{border:none}
-.cart-item:hover{background:#fafff9}
+.cart-item:hover{background:#f8fdf8}
 .cart-item-img{width:72px;height:72px;border-radius:14px;overflow:hidden;flex-shrink:0;position:relative;background:var(--gray100)}
 .cart-item-img img{width:100%;height:100%;object-fit:cover}
 .cart-item-img .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem}
@@ -22,35 +22,40 @@
 .cart-item-cat{font-size:.75rem;color:var(--gray400);text-transform:uppercase;letter-spacing:.06em}
 .cart-item-price{font-weight:800;color:var(--g700);font-size:1.05rem;white-space:nowrap}
 .cart-item-qty{display:flex;align-items:center;border:1.5px solid var(--gray200);border-radius:var(--rfull);overflow:hidden}
-.cart-qty-btn{padding:6px 12px;font-weight:700;font-size:1rem;color:var(--g700);background:none;border:none;cursor:pointer;transition:background .18s}
+.cart-qty-btn{padding:6px 13px;font-weight:700;font-size:1rem;color:var(--g700);background:none;border:none;cursor:pointer;transition:background .18s}
 .cart-qty-btn:hover{background:var(--g50)}
 .cart-qty-val{padding:6px 8px;font-weight:700;min-width:28px;text-align:center;font-size:.9rem}
 .cart-remove{background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--gray400);margin-left:8px;transition:color .18s;flex-shrink:0}
 .cart-remove:hover{color:#ef4444}
-.cart-summary{padding:24px;position:sticky;top:90px}
-.cart-summary h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:18px}
-.sum-row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:10px}
-.sum-row.total{font-weight:800;font-size:1.1rem;padding-top:12px;border-top:1px solid var(--gray100);margin-top:6px}
+/* Summary */
+.cart-summary{padding:26px;position:sticky;top:90px}
+.cart-summary h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:20px}
+.sum-row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:11px;align-items:center}
+.sum-row.discount{color:#15803d;font-weight:600}
+.sum-row.discount span:last-child{font-weight:700}
+.sum-row.total{font-weight:800;font-size:1.12rem;padding-top:14px;border-top:2px solid var(--gray100);margin-top:8px}
 .sum-delivery-badge{padding:10px 14px;border-radius:12px;font-size:.84rem;font-weight:600;margin:14px 0;display:flex;align-items:center;gap:8px}
 .sum-delivery-badge.free{background:#dcfce7;color:#166534}
 .sum-delivery-badge.paid{background:#fef9c3;color:#92400e}
-.delivery-progress{background:var(--gray100);border-radius:var(--rfull);height:8px;margin:8px 0 4px;overflow:hidden}
-.delivery-progress-bar{height:100%;border-radius:var(--rfull);background:linear-gradient(90deg,var(--g400),var(--g600));transition:width .5s ease}
-.delivery-hint{font-size:.76rem;color:var(--gray400);text-align:center;margin-bottom:14px}
-.cart-empty{text-align:center;padding:60px 20px;color:var(--gray400)}
+.delivery-progress{background:var(--gray100);border-radius:var(--rfull);height:7px;margin:8px 0 4px;overflow:hidden}
+.delivery-progress-bar{height:100%;border-radius:var(--rfull);background:linear-gradient(90deg,var(--g500),var(--g700));transition:width .5s ease}
+.delivery-hint{font-size:.75rem;color:var(--gray400);text-align:center;margin-bottom:14px}
+.cart-empty{text-align:center;padding:64px 20px;color:var(--gray400)}
 .cart-empty .ei{font-size:3.5rem;margin-bottom:16px}
 .cart-empty h3{font-size:1.2rem;color:var(--gray700);margin-bottom:8px}
-.wa-order-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:var(--rfull);background:#25D366;color:white;font-weight:700;font-size:1rem;border:none;cursor:pointer;text-decoration:none;margin-top:10px;transition:all .25s}
-.wa-order-btn:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.35)}
+.wa-order-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:var(--rfull);background:#25D366;color:white;font-weight:700;font-size:.95rem;border:none;cursor:pointer;text-decoration:none;margin-top:10px;transition:all .25s;font-family:inherit}
+.wa-order-btn:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.38)}
 /* Checkout form */
 .checkout-form-box{padding:28px;margin-top:24px}
 .checkout-form-title{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--gray100)}
 .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .cf-group{margin-bottom:14px}
-.cf-label{display:block;font-size:.82rem;font-weight:600;color:var(--gray700);margin-bottom:4px}
+.cf-label{display:block;font-size:.82rem;font-weight:600;color:var(--gray700);margin-bottom:5px}
 .cf-input,.cf-textarea{width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--gray200);font-family:inherit;font-size:.88rem;outline:none;background:var(--gray100);transition:.2s}
-.cf-input:focus,.cf-textarea:focus{border-color:var(--g400);background:white;box-shadow:0 0 0 3px rgba(34,197,94,.08)}
+.cf-input:focus,.cf-textarea:focus{border-color:var(--g500);background:white;box-shadow:0 0 0 3px rgba(22,101,52,.08)}
 .cf-textarea{min-height:80px;resize:vertical}
+/* Payment section */
+.pay-section-label{font-size:.82rem;font-weight:700;color:var(--gray700);margin-bottom:10px;display:block}
 @media(max-width:768px){.cart-grid{grid-template-columns:1fr}.form-row-2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -96,7 +101,7 @@
 
   <div id="cart-main" class="hidden">
     <div class="cart-grid">
-      <!-- Items -->
+      <!-- Items + Form -->
       <div>
         <div class="cart-items-box">
           <div class="cart-items-head">
@@ -131,6 +136,62 @@
             <label class="cf-label">Комментарий к заказу</label>
             <textarea class="cf-textarea" id="cf-comment" placeholder="Дополнительные пожелания, ориентиры..."></textarea>
           </div>
+
+          <!-- Payment methods -->
+          <div class="cf-group">
+            <label class="pay-section-label">💳 Способ оплаты *</label>
+            <div class="payment-methods" id="payment-methods">
+              <label class="pay-card selected" data-method="cash">
+                <input type="radio" name="payment" value="cash" checked>
+                <span class="pay-icon">💵</span>
+                <span class="pay-label">
+                  <span class="pay-name">Наличными</span>
+                  <span class="pay-sub">При получении</span>
+                </span>
+              </label>
+              <label class="pay-card" data-method="mbank">
+                <input type="radio" name="payment" value="mbank">
+                <span class="pay-icon">📱</span>
+                <span class="pay-label">
+                  <span class="pay-name">MBANK</span>
+                  <span class="pay-sub">Мобильный банк</span>
+                </span>
+              </label>
+              <label class="pay-card" data-method="obank">
+                <input type="radio" name="payment" value="obank">
+                <span class="pay-icon">🏦</span>
+                <span class="pay-label">
+                  <span class="pay-name">O!Bank</span>
+                  <span class="pay-sub">Перевод на счёт</span>
+                </span>
+              </label>
+              <label class="pay-card" data-method="bakai">
+                <input type="radio" name="payment" value="bakai">
+                <span class="pay-icon">🏦</span>
+                <span class="pay-label">
+                  <span class="pay-name">Бакай Банк</span>
+                  <span class="pay-sub">Перевод на счёт</span>
+                </span>
+              </label>
+              <label class="pay-card" data-method="transfer">
+                <input type="radio" name="payment" value="transfer">
+                <span class="pay-icon">💳</span>
+                <span class="pay-label">
+                  <span class="pay-name">Перевод на карту</span>
+                  <span class="pay-sub">Банковский перевод</span>
+                </span>
+              </label>
+              <label class="pay-card" data-method="card">
+                <input type="radio" name="payment" value="card">
+                <span class="pay-icon">💳</span>
+                <span class="pay-label">
+                  <span class="pay-name">Visa / Mastercard</span>
+                  <span class="pay-sub">Картой онлайн</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
           <button onclick="submitWhatsAppOrder()" class="wa-order-btn">
             📲 Оформить заказ через WhatsApp
           </button>
@@ -141,7 +202,11 @@
       <div class="cart-summary">
         <h3>Итого</h3>
         <div class="sum-row"><span>Товаров:</span><span id="sum-qty">0</span></div>
-        <div class="sum-row"><span>Сумма:</span><span id="sum-sub">0 сом</span></div>
+        <div class="sum-row"><span>Сумма товаров:</span><span id="sum-sub">0 сом</span></div>
+        <div class="sum-row discount" id="sum-discount-row" style="display:none">
+          <span>🏷 Скидка Greenleaf −50%:</span>
+          <span id="sum-discount-val">0 сом</span>
+        </div>
         <div class="sum-row"><span>Доставка:</span><span id="sum-delivery-val">300 сом</span></div>
         <div id="delivery-badge" class="sum-delivery-badge paid">
           <span>🚚</span><span id="delivery-badge-text">До бесплатной доставки: 5000 сом</span>
@@ -149,10 +214,10 @@
         <div class="delivery-progress"><div class="delivery-progress-bar" id="delivery-bar" style="width:0%"></div></div>
         <p class="delivery-hint">Бесплатная доставка от 5 000 сом</p>
         <div class="sum-row total"><span>К оплате:</span><strong id="sum-total">0 сом</strong></div>
-        <div id="user-discount-note" style="display:none;background:#dcfce7;color:#166534;padding:10px 12px;border-radius:10px;font-size:.8rem;font-weight:600;margin-top:12px;text-align:center">
-          ✅ Скидка 50% применена автоматически
+        <div id="user-discount-note" style="display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#166534;padding:11px 14px;border-radius:12px;font-size:.8rem;font-weight:600;margin-top:14px;text-align:center;border:1px solid #bbf7d0">
+          ✅ Партнёрская скидка 50% применена
         </div>
-        <a href="catalog.html" class="btn btn-outline" style="width:100%;margin-top:14px;text-align:center">⬅ Продолжить покупки</a>
+        <a href="catalog.html" class="btn btn-outline" style="width:100%;margin-top:16px;text-align:center">⬅ Продолжить покупки</a>
       </div>
     </div>
   </div>
@@ -190,6 +255,28 @@ const DELIVERY_COST = 300;
 function getCart() { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
 function saveCart(cart) { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
+// Payment method selection
+document.querySelectorAll('.pay-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+  });
+});
+
+function getSelectedPayment() {
+  const checked = document.querySelector('input[name="payment"]:checked');
+  if (!checked) return 'Наличными при получении';
+  const labels = {
+    cash: 'Наличными при получении',
+    mbank: 'MBANK',
+    obank: 'O!Bank',
+    bakai: 'Бакай Банк',
+    transfer: 'Перевод на карту',
+    card: 'Visa / Mastercard'
+  };
+  return labels[checked.value] || checked.value;
+}
+
 function clearCart() {
   if (confirm('Очистить корзину?')) { saveCart([]); renderCart(); }
 }
@@ -209,9 +296,6 @@ function removeItem(productId) {
   renderCart();
 }
 
-let _currentSubTotal = 0;
-let _isFreeDelivery = false;
-
 function renderCart() {
   const cart = getCart();
   const emptyState = document.getElementById('cart-empty-state');
@@ -227,14 +311,17 @@ function renderCart() {
 
   const list = document.getElementById('cart-items-list');
   const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-  const discount = user ? 0.5 : 1;
+  const discountRate = user ? 0.5 : 1;
 
-  if (user) document.getElementById('user-discount-note').style.display = 'block';
+  if (user) {
+    document.getElementById('user-discount-note').style.display = 'block';
+    document.getElementById('sum-discount-row').style.display = 'flex';
+  }
 
   list.innerHTML = cart.map(item => {
     const product = PRODUCTS.find(p => p.id === item.id);
     if (!product) return '';
-    const unitPrice = Math.round(product.price * discount);
+    const unitPrice = Math.round(product.price * discountRate);
     const imgSrc = BASE_IMG + product.img;
     return `
     <div class="cart-item">
@@ -245,7 +332,7 @@ function renderCart() {
       <div class="cart-item-info">
         <div class="cart-item-name">${product.name}</div>
         <div class="cart-item-cat">${product.catName}</div>
-        ${user ? `<div style="font-size:.72rem;color:#16a34a;font-weight:600;margin-top:2px">✅ −50% скидка</div>` : ''}
+        ${user ? `<div style="font-size:.72rem;color:#15803d;font-weight:600;margin-top:2px">🏷 −50% скидка</div>` : ''}
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <div class="cart-item-qty">
@@ -259,34 +346,41 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  let subTotal = 0;
+  // Calculate totals
+  let originalTotal = 0;
+  let discountedTotal = 0;
   cart.forEach(item => {
     const product = PRODUCTS.find(p => p.id === item.id);
     if (!product) return;
-    subTotal += Math.round(product.price * discount) * item.qty;
+    originalTotal += product.price * item.qty;
+    discountedTotal += Math.round(product.price * discountRate) * item.qty;
   });
-  _currentSubTotal = subTotal;
 
-  const totalQty = cart.reduce((s,x) => s+x.qty, 0);
-  const isFree = subTotal >= FREE_DELIVERY_THRESHOLD;
-  _isFreeDelivery = isFree;
-  const total = subTotal + (isFree ? 0 : DELIVERY_COST);
+  const totalQty = cart.reduce((s, x) => s + x.qty, 0);
+  const isFree = discountedTotal >= FREE_DELIVERY_THRESHOLD;
+  const delivery = isFree ? 0 : DELIVERY_COST;
+  const grandTotal = discountedTotal + delivery;
+  const discountAmount = originalTotal - discountedTotal;
 
   document.getElementById('sum-qty').textContent = totalQty;
-  document.getElementById('sum-sub').textContent = formatPrice(subTotal);
+  document.getElementById('sum-sub').textContent = formatPrice(user ? originalTotal : discountedTotal);
   document.getElementById('sum-delivery-val').textContent = isFree ? 'Бесплатно 🎉' : formatPrice(DELIVERY_COST);
-  document.getElementById('sum-total').textContent = formatPrice(total);
+  document.getElementById('sum-total').textContent = formatPrice(grandTotal);
   document.getElementById('cart-count-title').textContent = `(${totalQty})`;
+
+  if (user) {
+    document.getElementById('sum-discount-val').textContent = '−' + formatPrice(discountAmount);
+  }
 
   const badge = document.getElementById('delivery-badge');
   const bar = document.getElementById('delivery-bar');
-  bar.style.width = Math.min(100, (subTotal/FREE_DELIVERY_THRESHOLD)*100) + '%';
+  bar.style.width = Math.min(100, (discountedTotal / FREE_DELIVERY_THRESHOLD) * 100) + '%';
   if (isFree) {
     badge.className = 'sum-delivery-badge free';
     document.getElementById('delivery-badge-text').textContent = '🎉 Бесплатная доставка!';
   } else {
     badge.className = 'sum-delivery-badge paid';
-    document.getElementById('delivery-badge-text').textContent = `До бесплатной: ${formatPrice(FREE_DELIVERY_THRESHOLD - subTotal)}`;
+    document.getElementById('delivery-badge-text').textContent = `До бесплатной: ${formatPrice(FREE_DELIVERY_THRESHOLD - discountedTotal)}`;
   }
 }
 
@@ -296,6 +390,7 @@ function submitWhatsAppOrder() {
   const address = document.getElementById('cf-address').value.trim();
   const time = document.getElementById('cf-time').value.trim();
   const comment = document.getElementById('cf-comment').value.trim();
+  const payment = getSelectedPayment();
 
   if (!name || !phone || !address) {
     showNotif('Заполните имя, телефон и адрес доставки', 'warning');
@@ -304,35 +399,49 @@ function submitWhatsAppOrder() {
 
   const cart = getCart();
   const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-  const discount = user ? 0.5 : 1;
+  const discountRate = user ? 0.5 : 1;
 
-  const lines = [
-    `*Заказ Greenleaf* 🌿`,
-    `Имя: ${name}`,
-    `Телефон: ${phone}`,
-    `Адрес: ${address}`,
-    time ? `Время: ${time}` : '',
-    comment ? `Комментарий: ${comment}` : '',
-    '',
-    '*Товары:*'
-  ];
+  let originalTotal = 0;
+  let discountedTotal = 0;
+  const productLines = [];
 
-  let subTotal = 0;
   cart.forEach(item => {
     const product = PRODUCTS.find(p => p.id === item.id);
     if (!product) return;
-    const unitPrice = Math.round(product.price * discount);
-    subTotal += unitPrice * item.qty;
-    lines.push(`• ${product.name} x${item.qty} = ${formatPrice(unitPrice * item.qty)}`);
+    const origUnit = product.price;
+    const discUnit = Math.round(origUnit * discountRate);
+    originalTotal += origUnit * item.qty;
+    discountedTotal += discUnit * item.qty;
+    productLines.push(`• ${product.name} x${item.qty} = ${formatPrice(discUnit * item.qty)}`);
   });
-  lines.push('');
-  const isFree = subTotal >= FREE_DELIVERY_THRESHOLD;
-  lines.push(`Сумма: ${formatPrice(subTotal)}`);
-  lines.push(`Доставка: ${isFree ? 'Бесплатно 🎉' : formatPrice(DELIVERY_COST)}`);
-  lines.push(`*Итого: ${formatPrice(subTotal + (isFree ? 0 : DELIVERY_COST))}*`);
-  if (user) lines.push(`(Партнёрская скидка 50% применена)`);
 
-  const waText = lines.filter(Boolean).join('\n');
+  const isFree = discountedTotal >= FREE_DELIVERY_THRESHOLD;
+  const delivery = isFree ? 0 : DELIVERY_COST;
+  const grandTotal = discountedTotal + delivery;
+  const discountAmount = originalTotal - discountedTotal;
+
+  const lines = [
+    `*Заказ Greenleaf* 🌿`,
+    ``,
+    `👤 Имя: ${name}`,
+    `📞 Телефон: ${phone}`,
+    `📍 Адрес: ${address}`,
+    time ? `⏰ Время: ${time}` : '',
+    comment ? `💬 Комментарий: ${comment}` : '',
+    `💳 Способ оплаты: ${payment}`,
+    ``,
+    `*Состав заказа:*`,
+    ...productLines,
+    ``,
+    `💰 Сумма товаров: ${formatPrice(user ? originalTotal : discountedTotal)}`,
+    user ? `🏷 Скидка Greenleaf −50%: −${formatPrice(discountAmount)}` : '',
+    `🚚 Доставка: ${isFree ? 'Бесплатно 🎉' : formatPrice(DELIVERY_COST)}`,
+    ``,
+    `*✅ Итого: ${formatPrice(grandTotal)}*`,
+    user ? `(Партнёрская скидка 50% применена)` : ''
+  ];
+
+  const waText = lines.filter(l => l !== '').join('\n');
   window.open(`https://wa.me/996700713905?text=${encodeURIComponent(waText)}`, '_blank');
 }
 
